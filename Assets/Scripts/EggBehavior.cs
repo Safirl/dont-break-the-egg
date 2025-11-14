@@ -18,7 +18,7 @@ public class EggBehavior : MonoBehaviour
         {
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                // force.y += m_strength;
+                force.y += m_strength;
             }
         }
 
@@ -27,11 +27,11 @@ public class EggBehavior : MonoBehaviour
         {
             if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
             {
-                force.x += m_strength;
+                force.x -= m_strength;
             }
             if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
             {
-                force.x -= m_strength;
+                force.x += m_strength;
             }
         }
 
@@ -49,7 +49,7 @@ public class EggBehavior : MonoBehaviour
         }
 
         PushEgg(force);
-        print(m_rigidBody.linearVelocity);
+        // print(m_rigidBody.linearVelocity);
     }
 
     void PushEgg(Vector3 direction)
