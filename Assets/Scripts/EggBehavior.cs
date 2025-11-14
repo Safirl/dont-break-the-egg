@@ -7,11 +7,6 @@ public class EggBehavior : MonoBehaviour
     [SerializeField] private Rigidbody m_rigidBody;
     [SerializeField] private float m_strength = 5;
     [SerializeField] private float m_maxVelocity = 10;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -23,7 +18,7 @@ public class EggBehavior : MonoBehaviour
         {
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                force.y += m_strength;
+                // force.y += m_strength;
             }
         }
 

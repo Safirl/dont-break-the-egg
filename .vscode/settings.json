@@ -67,5 +67,8 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "cook-the-egg.slnx"
+    "dotnet.defaultSolution": "cook-the-egg.slnx",
+    "files.watcherExclude": {
+        "**": true
+    },
 }
