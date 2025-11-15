@@ -1,59 +1,114 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class EggBehavior : MonoBehaviour
 {
-    [SerializeField] private Rigidbody m_rigidBody;
-    [SerializeField] private float m_strength = 5;
-    [SerializeField] private float m_maxVelocity = 10;
+    [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private float strength = 5;
+    [SerializeField] private float jumpStrength = 10;
+    [SerializeField] private float maxVelocity = 10;
+    [SerializeField] private float collisionDotProduct = .85f;
+    [SerializeField] private float destructionSpeed = 8;
+    [FormerlySerializedAs("collisionMask")] [SerializeField] private LayerMask collisionMask;
+    [SerializeField] private float jumpDistance = 1f;
+    [SerializeField] private float moveDistance = 3f;
+    
+    private float jumpDelay = .2f;
+    private float jumpCooldown;
+
+    private void Start()
+    {
+        GameManager.Instance.OnLevelStarted += OnLevelStarted;
+        GameManager.Instance.OnLevelEnded += OnLevelEnded;
+    }
+
+    private void OnLevelStarted()
+    {
+        // rigidBody.useGravity = true;
+    }
+    
+    private void OnLevelEnded()
+    {
+        // rigidBody.useGravity = true;
+    }
+
+    private void Update()
+    { 
+        jumpCooldown += Time.deltaTime;
+    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        var force = Vector3.zero;
+        if (!GameManager.Instance.HasLevelStarted) return;
         
-        //up
-        if (Math.Abs(m_rigidBody.linearVelocity.y) < m_maxVelocity)
+        var force = Vector3.zero;
+        //If the player is to high, we don't want to allow movements
+        Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit hit, moveDistance,collisionMask);
+        if (!hit.collider)
         {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            return;
+        }
+
+        //jump
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && jumpCooldown > jumpDelay)
+        {
+            Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit jumpHit, jumpDistance,collisionMask);
+            if (jumpHit.collider != null)
             {
-                force.y += m_strength;
+                force.y += jumpStrength;
+                jumpCooldown = 0f;
             }
         }
 
         //sides
-        if (Math.Abs(m_rigidBody.linearVelocity.x) < m_maxVelocity)
+        if (rigidBody.linearVelocity.x > -maxVelocity && Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-            {
-                force.x -= m_strength;
-            }
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-            {
-                force.x += m_strength;
-            }
+            force.x -= strength;
+        }
+        if (rigidBody.linearVelocity.x < maxVelocity && Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        {
+            force.x += strength;
         }
 
         //forward/backward
-        if (Math.Abs(m_rigidBody.linearVelocity.z) < m_maxVelocity)
+        if (rigidBody.linearVelocity.z > -maxVelocity && Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-            {
-                force.z -= m_strength;
-            }
-            if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-            {
-                force.z += m_strength;
-            }
+            force.z -= strength;
+        }
+        if (rigidBody.linearVelocity.z < maxVelocity && Keyboard.current.downArrowKey.wasPressedThisFrame)
+        {
+            force.z += strength;
         }
 
         PushEgg(force);
-        // print(m_rigidBody.linearVelocity);
     }
 
     void PushEgg(Vector3 direction)
     {
-        m_rigidBody.AddForce(direction, ForceMode.Impulse);
+        rigidBody.AddForce(direction, ForceMode.Impulse);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        var contactNormal = other.contacts[0].normal;
+        if (Vector3.Dot(contactNormal, new Vector3(0, 1, 0)) > collisionDotProduct &&
+            rigidBody.linearVelocity.y > destructionSpeed)
+        {
+            print("Y destroyed" + rigidBody.linearVelocity.y);    
+        }
+        // else if (Math.Abs(Vector3.Dot(contactNormal, new Vector3(1, 0, 0))) > collisionDotProduct &&
+        //          Math.Abs(rigidBody.linearVelocity.x) > destructionSpeed)
+        // {
+        //     print("X destroyed" + rigidBody.linearVelocity.x);
+        // }
+        // else if (Math.Abs(Vector3.Dot(contactNormal, new Vector3(0, 0, 1))) > collisionDotProduct &&
+        //          Math.Abs(rigidBody.linearVelocity.z) > destructionSpeed)
+        // {
+        //     print("Z destroyed" + rigidBody.linearVelocity.z);
+        // }
+        
     }
 }
