@@ -1,29 +1,32 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class CameraBehavior : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    private Vector3 previousPosition;
+    [SerializeField] private Transform player;
+    [SerializeField] private float damping = .8f;
+    [SerializeField] private Vector3 offset;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        previousPosition = player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!player || !gameObject)
+    }
+
+    private void LateUpdate()
+    {
+        if (!player)
         {
             print("player or gameObject is null!");
             return;
         }
-        var newPlayerPosition = player.transform.position;
-        var translation = newPlayerPosition - previousPosition;
-        previousPosition = newPlayerPosition;
-        // print(new Vector3(translation.x * .8f, translation.y * .8f, translation.z * .8f));
-        gameObject.transform.position += new Vector3(translation.x, translation.y, translation.z);
+        var targetPosition = player.position + offset;
+        //easing
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * damping);
     }
 }

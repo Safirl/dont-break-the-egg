@@ -9,43 +9,35 @@ public class EggBehavior : MonoBehaviour
     [SerializeField] private float m_maxVelocity = 10;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var force = Vector3.zero;
-        
-        //up
-        if (Math.Abs(m_rigidBody.linearVelocity.y) < m_maxVelocity)
-        {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            {
-                force.y += m_strength;
-            }
-        }
+
+        // if (m_rigidBody.linearVelocity.y < m_maxVelocity && Keyboard.current.spaceKey.wasPressedThisFrame)
+        // {
+        //     force.y += m_strength;
+        // }
 
         //sides
-        if (Math.Abs(m_rigidBody.linearVelocity.x) < m_maxVelocity)
+        if (m_rigidBody.linearVelocity.x > -m_maxVelocity && Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-            {
-                force.x -= m_strength;
-            }
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-            {
-                force.x += m_strength;
-            }
+            force.x -= m_strength;
+        }
+        if (m_rigidBody.linearVelocity.x < m_maxVelocity && Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        {
+            force.x += m_strength;
         }
 
         //forward/backward
-        if (Math.Abs(m_rigidBody.linearVelocity.z) < m_maxVelocity)
+        if (m_rigidBody.linearVelocity.z > -m_maxVelocity && Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-            {
-                force.z -= m_strength;
-            }
-            if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-            {
-                force.z += m_strength;
-            }
+            print("forward");
+            force.z -= m_strength;
+        }
+        if (m_rigidBody.linearVelocity.z < m_maxVelocity && Keyboard.current.downArrowKey.wasPressedThisFrame)
+        {
+            print("backward");
+            force.z += m_strength;
         }
 
         PushEgg(force);
