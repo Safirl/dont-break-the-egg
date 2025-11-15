@@ -7,6 +7,7 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 startRotation;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
