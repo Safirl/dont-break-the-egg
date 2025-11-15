@@ -18,6 +18,22 @@ public class EggBehavior : MonoBehaviour
     private float jumpDelay = .2f;
     private float jumpCooldown;
 
+    private void Start()
+    {
+        GameManager.Instance.OnLevelStarted += OnLevelStarted;
+        GameManager.Instance.OnLevelEnded += OnLevelEnded;
+    }
+
+    private void OnLevelStarted()
+    {
+        // rigidBody.useGravity = true;
+    }
+    
+    private void OnLevelEnded()
+    {
+        // rigidBody.useGravity = true;
+    }
+
     private void Update()
     { 
         jumpCooldown += Time.deltaTime;
@@ -26,6 +42,8 @@ public class EggBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.Instance.HasLevelStarted) return;
+        
         var force = Vector3.zero;
         //If the player is to high, we don't want to allow movements
         Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit hit, moveDistance,collisionMask);

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2132875503221153408}
   m_Layer: 0
   m_Name: Egg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,11 +155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rigidBody: {fileID: 3315499994716290234}
   strength: 5
-  jumpStrength: 10
+  jumpStrength: 8
   maxVelocity: 10
   collisionDotProduct: 0.85
   destructionSpeed: 8
   collisionMask:
     serializedVersion: 2
     m_Bits: 8
-  jumpDistance: 1
+  jumpDistance: 1.5
+  moveDistance: 4
