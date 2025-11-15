@@ -19,7 +19,14 @@ public class GameManager : MonoBehaviour
     
     public float _totalTime { get; private set; } = 20;
     public bool IsGameRunning { get; private set; } = false;
-    
+
+    // public UnityEvent onLevelStarted = new UnityEvent();
+    // public UnityEvent onLevelEnded = new UnityEvent();
+
+    public float timeLeft { get; private set; }
+
+    [SerializeField] private CameraBehavior sceneCamera;
+
     public static GameManager Instance
     {
         get; private set;
@@ -43,23 +50,29 @@ public class GameManager : MonoBehaviour
     {
         IsGameRunning = true;
         
-        
         Level = FindObjectOfType<GameLevel>();
+        timeLeft = totalTime;
+        sceneCamera.OnIntroAnimationCompleted += OnIntroFinished;
+        StartCoroutine(StartGameCoroutine());
 
         if (!(Level is GameLevel))
             throw new Exception("No Level found");
-
         
         Level.Start();
     }
     
+    private IEnumerator StartGameCoroutine()
+    {
+        yield return null; // Attend 1 frame pour que tous les objets soient initialisés
+        StartGame();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsGameRunning) return;
-        _totalTime -= Time.deltaTime;
-        // print (_totalTime);
+        if (!HasLevelStarted) return;
+        timeLeft -= Time.deltaTime;
+        print (timeLeft);
     }
 
 
