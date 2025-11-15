@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     
     private int currentLevel = 0;
 
-    private float _totalTime = 20;
+    public float _totalTime { get; private set; } = 20;
     public bool HasLevelStarted { get; private set; } = false;
 
     [SerializeField] private CameraBehavior sceneCamera;
