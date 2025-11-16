@@ -1,4 +1,5 @@
 using System;
+using Levels;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -20,10 +21,30 @@ public class EggBehavior : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnLevelStarted += OnLevelStarted;
-        GameManager.Instance.OnLevelEnded += OnLevelEnded;
+        //GameLevel.Instance.OnLevelStarted += OnLevelStarted;
+        //GameLevel.Instance.OnLevelEnded += OnLevelEnded;
     }
 
+    
+    private void OnEnable()
+    {
+        if (GameLevel.Instance != null)
+        {
+            GameLevel.Instance.OnLevelStarted += OnLevelStarted;
+            GameLevel.Instance.OnLevelEnded += OnLevelEnded;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (GameLevel.Instance != null)
+        {
+            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
+            GameLevel.Instance.OnLevelEnded -= OnLevelEnded;
+        }
+    }
+    
+        
     private void OnLevelStarted()
     {
         // rigidBody.useGravity = true;
@@ -42,7 +63,7 @@ public class EggBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!GameManager.Instance.HasLevelStarted) return;
+        if (GameLevel.Instance && !GameLevel.Instance.IsLevelRunning) return;
         
         var force = Vector3.zero;
         //If the player is to high, we don't want to allow movements

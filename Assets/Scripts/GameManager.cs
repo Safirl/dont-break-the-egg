@@ -1,28 +1,25 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+using Levels;
+using Scenes;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine.Events;
+
+
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pan;
-    [SerializeField] GameObject player;
-    public delegate void OnLevelStartedDelegate();
-    public delegate void OnLevelEndedDelegate();
     
-    public OnLevelStartedDelegate OnLevelStarted;
-    public OnLevelEndedDelegate OnLevelEnded;
+    public ScenesOrder currentLevel = ScenesOrder.LEVEL_1;
+    public GameLevel Level;
+    public ScenesOrder currentScene = ScenesOrder.LEVEL_1;
     
-    // public UnityEvent onLevelStarted = new UnityEvent();
-    // public UnityEvent onLevelEnded = new UnityEvent();
-    
-    private int currentLevel = 0;
-
     public float _totalTime { get; private set; } = 20;
-    public bool HasLevelStarted { get; private set; } = false;
-
-    [SerializeField] private CameraBehavior sceneCamera;
-
+    public bool IsGameRunning { get; private set; } = false;
+    
     public static GameManager Instance
     {
         get; private set;
@@ -31,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (Instance && Instance != this) 
         { 
             Destroy(this); 
@@ -43,42 +41,44 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        sceneCamera.OnIntroAnimationCompleted += OnIntroFinished;
-        StartCoroutine(StartGameCoroutine());
-    }
-    
-    private IEnumerator StartGameCoroutine()
-    {
-        yield return null; // Attend 1 frame pour que tous les objets soient initialisés
-        StartGame();
-    }
-    
+        IsGameRunning = true;
+        
+        
+        Level = FindObjectOfType<GameLevel>();
 
-    public void OnIntroFinished()
-    {
-        HasLevelStarted = true;
+        if (!(Level is GameLevel))
+            throw new Exception("No Level found");
+
+        
+        Level.Start();
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        if (!HasLevelStarted) return;
+        if (!IsGameRunning) return;
         _totalTime -= Time.deltaTime;
-        print (_totalTime);
+        // print (_totalTime);
     }
 
-    void StartGame()
+
+
+    public void StartLevel()
     {
-        StartLevel();
+        Level.StartLevel();
+    }
+    public void WinLevel()
+    {
+        if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
+        
+        Level.Win();
     }
 
-    void StartLevel()
+    public  void LoseLevel(EndingLevelStatus cause)
     {
-        OnLevelStarted?.Invoke();
-    }
-
-    void EndLevel()
-    {
-        OnLevelEnded?.Invoke();
+        if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
+        
+        Level.Lose(cause);
     }
 }

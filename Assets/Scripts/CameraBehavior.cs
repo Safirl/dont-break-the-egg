@@ -2,15 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using Levels;
 using UnityEngine.Events;
 
 public class CameraBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform pan;
+    // [SerializeField] private Transform playerPosition;
+    [SerializeField] private Transform targetPosition;
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
+    public bool isDevMode;
+    public bool isIntroAnimationComplete = false;
 
     public delegate void OnIntroAnimationCompletedDelegate();
 
@@ -19,14 +22,22 @@ public class CameraBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.Instance.OnLevelStarted += OnLevelStarted ;
-        if (!pan || !player)
-        {
-            pan = GameObject.FindWithTag("Target").transform;
-            player = GameObject.FindWithTag("Player").transform;
-        }
     }
 
+    public void SetTargetPosition(Transform tp)
+    {
+        targetPosition = tp;
+    }
+
+    private void Awake()
+    {
+        if (!(GameLevel.Instance is GameLevel)) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        
+        GameLevel.Instance.OnLevelStarted += OnLevelStarted;
+        
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {
@@ -34,43 +45,66 @@ public class CameraBehavior : MonoBehaviour
 
     public void OnLevelStarted()
     {
-        transform.position = pan.position + offset;
-        
-        transform.DOMove(player.position + offset, 10f).SetEase(Ease.InOutExpo).OnComplete(() =>
+
+        if (!isDevMode)
         {
+            
+            transform.position = targetPosition.position + offset;
+            
+            transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
+                .OnComplete(() => {
+                    OnIntroAnimationCompleted.Invoke();
+                    isIntroAnimationComplete = true;
+                });
+        } else {
+            transform.position = targetPosition.position + offset;
             OnIntroAnimationCompleted.Invoke();
-        });
+                    isIntroAnimationComplete = true;
+        }
+            
+            
+            
     }
 
     private void LateUpdate()
     {
-        if (!player)
-        {
-            print("player or gameObject is null!");
-            return;
-        }
 
-        if (!GameManager.Instance.HasLevelStarted)
+
+        if (!GameManager.Instance.IsGameRunning) return;
+
+
+        if (!targetPosition)
         {
-            return;
+            targetPosition = new GameObject("FakeTarget").transform;
         }
         
-        var targetPosition = player.position + offset;
-        //easing
-        var compareDistSqr = .001f;
-
-        if (targetPosition == transform.position)
-        {
-            return;
-        }
         
-        if ((targetPosition - transform.position).sqrMagnitude <= compareDistSqr)
+        Vector3 newTargetPosition = targetPosition.position + offset;
+
+        float compareDistSqr = .001f;
+
+        
+        if (newTargetPosition == transform.position) return;
+        
+        
+        
+        if ((newTargetPosition - transform.position).sqrMagnitude <= compareDistSqr)
         {
-            transform.position = targetPosition;
+            transform.position = newTargetPosition;
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * damping);
+            transform.position = Vector3.Lerp(transform.position, newTargetPosition, Time.deltaTime * damping);
         }
     }
+    
+    
+    private void OnDisable()
+    {
+        if (GameLevel.Instance != null)
+        {
+            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
+        }
+    }
+
 }
