@@ -8,6 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/WinningScene.unity
+    guid: 33b5bb246d846ee4a9ef92c637e8e080
+  - enabled: 1
+    path: Assets/Scenes/LosingScene.unity
+    guid: bcd3c49786f6ea7478b0ea7934f64aa8
+  - enabled: 1
+    path: Assets/Scenes/emilien_tests.unity
+    guid: 01fffccc589f5284583c1fbd396c7290
+  - enabled: 1
+    path: Assets/Scenes/emilien_tests_2.unity
+    guid: e2bc3fab3e300a640bcb3ffc779d2623
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

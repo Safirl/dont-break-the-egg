@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Levels;
+using Scenes;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine.Events;
@@ -28,7 +29,7 @@ namespace Levels
         private bool _isRacing = false;
         public bool IsLevelRunning { get; private set; } = false;
         public bool IsLevelWon { get; private set; } = false;
-
+        public SceneManager SceneManager;
         
         protected virtual void Awake()
         {
@@ -86,6 +87,27 @@ namespace Levels
             IsLevelRunning = false;
             IsLevelWon = isWon;
             print("is won ? " + isWon + cause);
+
+            switch (cause)
+            {
+                case  EndingLevelStatus.BROKEN:
+                case  EndingLevelStatus.CATCHED:
+                case  EndingLevelStatus.TIMEOUT:
+                    SceneManager.LoadNextLevel(RequestScene.LOSE);
+                    break;
+                
+                case  EndingLevelStatus.WON:
+                    SceneManager.LoadNextLevel(RequestScene.WIN);
+                    break;
+                /*
+                 * handle special case for next level
+                 */
+                    
+                    
+                default:
+                    throw new Exception("ERROR: the end cause is not handled" +  cause);
+
+            }
         }
 
         public void StartLevel()
@@ -97,7 +119,7 @@ namespace Levels
         
         public void Win()
         {
-            EndLevel(true, EndingLevelStatus.WON);   
+            EndLevel(true, EndingLevelStatus.WON);
         }
 
         public void Lose(EndingLevelStatus cause)

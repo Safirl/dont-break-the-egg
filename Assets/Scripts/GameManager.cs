@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Levels;
+using Scenes;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine.Events;
@@ -15,9 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player;
     
     
-    public int currentLevel = 0;
+    public ScenesOrder currentLevel = ScenesOrder.LEVEL_1;
     public GameLevel Level;
-  
+    public ScenesOrder currentScene = ScenesOrder.LEVEL_1;
     
     public float _totalTime { get; private set; } = 20;
     public bool IsGameRunning { get; private set; } = false;
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
         
         Level.Lose(cause);
+        
         
     }
     
