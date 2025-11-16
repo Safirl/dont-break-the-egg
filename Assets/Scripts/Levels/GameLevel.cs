@@ -25,6 +25,7 @@ namespace Levels
         public OnLevelEndedDelegate OnLevelEnded;
         
         private float _totalTime = 20;
+        private bool _isRacing = false;
         public bool IsLevelRunning { get; private set; } = false;
         public bool IsLevelWon { get; private set; } = false;
 
@@ -43,6 +44,14 @@ namespace Levels
             StartCoroutine(StartGameCoroutine());
         }
         
+        private IEnumerator StartGameCoroutine()
+        {
+            yield return null; // Attend 1 frame pour que tous les objets soient initialisés
+            print("GAMELEVEL : On LevelStarting" + OnLevelStarted);
+            OnLevelStarted?.Invoke();
+
+        }
+        
         public void OnIntroFinished()
         {
             IsLevelRunning = true;
@@ -51,35 +60,40 @@ namespace Levels
 
         public void Update()
         {
-            OnUpdate();
             if (!IsLevelRunning) return;
-            float v = _totalTime - Time.deltaTime;
-
-
-            if (v <= 0)
+            
+            //OnBeforeUpdate method could be called here if we need in the future
+            if (_isRacing)
             {
-                EndLevel(false, EndingLevelStatus.TIMEOUT);
-                return;
+                float v = _totalTime - Time.deltaTime;
+
+
+                if (v <= 0)
+                {
+                    EndLevel(false, EndingLevelStatus.TIMEOUT);
+                    return;
+                }   
+
+                _totalTime = v > 0f ? v : 0f;
+                
             }
-
-            _totalTime = v > 0f ? v : 0f;
-
+            OnUpdate();
         }
 
         public void EndLevel(bool isWon, EndingLevelStatus cause)
         {
+            _isRacing = false;
             IsLevelRunning = false;
             IsLevelWon = isWon;
+            print("is won ? " + isWon + cause);
         }
-        
-        
-        private IEnumerator StartGameCoroutine()
-        {
-            yield return null; // Attend 1 frame pour que tous les objets soient initialisés
-            print("GAMELEVEL : On LevelStarting" + OnLevelStarted);
-            OnLevelStarted?.Invoke();
 
+        public void StartLevel()
+        {
+            _isRacing = true;
         }
+        
+
         
         public void Win()
         {

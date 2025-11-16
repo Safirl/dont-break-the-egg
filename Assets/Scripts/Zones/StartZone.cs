@@ -6,7 +6,7 @@ namespace Zones
     {
         private void OnTriggerExit(Collider other)
         {
-            print("START THE LVL");
+            GameManager.StartLevel();
         }
     }
 }

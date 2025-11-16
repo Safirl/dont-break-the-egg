@@ -63,17 +63,21 @@ public class GameManager : MonoBehaviour
         _totalTime -= Time.deltaTime;
         // print (_totalTime);
     }
-    
 
 
-    void Win()
+
+    public void StartLevel()
+    {
+        Level.StartLevel();
+    }
+    public void WinLevel()
     {
         if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
         
         Level.Win();
     }
 
-    void Lose(EndingLevelStatus cause)
+    public  void LoseLevel(EndingLevelStatus cause)
     {
         if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
         

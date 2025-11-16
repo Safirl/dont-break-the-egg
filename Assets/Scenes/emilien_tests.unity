@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ba9f4fcabe44e19fe9bca2981e7d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanZone
-  GameManager: {fileID: 0}
+  GameManager: {fileID: 2076752635}
 --- !u!1001 &1663336269
 PrefabInstance:
   m_ObjectHideFlags: 0

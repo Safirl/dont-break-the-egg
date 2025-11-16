@@ -64,7 +64,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void LateUpdate()
     {
-        print(GameManager.Instance.IsGameRunning);
+
                 
         if (!GameManager.Instance.IsGameRunning) return;
         
