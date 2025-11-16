@@ -33,6 +33,11 @@ namespace Scenes
                     ChangeScene(ScenesOrder.LOSING);
                     break;
                 
+                case  RequestScene.SAME_SCENE:
+                    ChangeScene(currentLevel);
+                    break;
+
+                
                 case  RequestScene.WIN:
                     ChangeScene(ScenesOrder.WINNING);
                     break;

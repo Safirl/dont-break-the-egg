@@ -104,6 +104,10 @@ namespace Levels
                 case  EndingLevelStatus.NEXT:
                     SceneManager.LoadNextLevel(RequestScene.NEXT_SCENE);
                     break;
+                
+                case  EndingLevelStatus.RESUME:
+                    SceneManager.LoadNextLevel(RequestScene.SAME_SCENE);
+                    break;
                     
                     
                 default:
