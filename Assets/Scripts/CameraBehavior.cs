@@ -7,12 +7,14 @@ using UnityEngine.Events;
 
 public class CameraBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform pan;
+    // [SerializeField] private Transform playerPosition;
+    [SerializeField] private Transform targetPosition;
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
     public bool isDevMode;
+    public bool isIntroAnimationComplete = false;
+
     public delegate void OnIntroAnimationCompletedDelegate();
 
     public OnIntroAnimationCompletedDelegate OnIntroAnimationCompleted;
@@ -20,11 +22,16 @@ public class CameraBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (!pan || !player)
-        {
-            pan = GameObject.FindWithTag("Target").transform;
-            player = GameObject.FindWithTag("Player").transform;
-        }
+        // if (!pan || !player)
+        // {
+        //     pan = GameObject.FindWithTag("Target").transform;
+        //     player = GameObject.FindWithTag("Player").transform;
+        // }
+    }
+
+    public void SetTargetPosition(Transform tp)
+    {
+        targetPosition = tp;
     }
 
     private void Awake()
@@ -47,15 +54,17 @@ public class CameraBehavior : MonoBehaviour
         if (!isDevMode)
         {
             
-            transform.position = pan.position + offset;
+            transform.position = targetPosition.position + offset;
             
-            transform.DOMove(player.position + offset, 10f).SetEase(Ease.InOutExpo)
+            transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
                 .OnComplete(() => {
                     OnIntroAnimationCompleted.Invoke();
+                    isIntroAnimationComplete = true;
                 });
         } else {
-            transform.position = player.position + offset;
+            transform.position = targetPosition.position + offset;
             OnIntroAnimationCompleted.Invoke();
+                    isIntroAnimationComplete = true;
         }
             
             
@@ -65,30 +74,32 @@ public class CameraBehavior : MonoBehaviour
     private void LateUpdate()
     {
 
-                
+
         if (!GameManager.Instance.IsGameRunning) return;
-        
-        
-        if (!player)
-            throw new Exception("Player or gameObject is null");
-        
-        
-        var targetPosition = player.position + offset;
 
-        var compareDistSqr = .001f;
 
-        
-        if (targetPosition == transform.position) return;
-        
-        
-        
-        if ((targetPosition - transform.position).sqrMagnitude <= compareDistSqr)
+        if (!targetPosition)
         {
-            transform.position = targetPosition;
+            targetPosition = new GameObject("FakeTarget").transform;
+        }
+        
+        
+        Vector3 newTargetPosition = targetPosition.position + offset;
+
+        float compareDistSqr = .001f;
+
+        
+        if (newTargetPosition == transform.position) return;
+        
+        
+        
+        if ((newTargetPosition - transform.position).sqrMagnitude <= compareDistSqr)
+        {
+            transform.position = newTargetPosition;
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * damping);
+            transform.position = Vector3.Lerp(transform.position, newTargetPosition, Time.deltaTime * damping);
         }
     }
     

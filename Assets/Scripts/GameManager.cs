@@ -12,9 +12,6 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pan;
-    [SerializeField] GameObject player;
-    
     
     public ScenesOrder currentLevel = ScenesOrder.LEVEL_1;
     public GameLevel Level;
@@ -83,9 +80,5 @@ public class GameManager : MonoBehaviour
         if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
         
         Level.Lose(cause);
-        
-        
     }
-    
-
 }

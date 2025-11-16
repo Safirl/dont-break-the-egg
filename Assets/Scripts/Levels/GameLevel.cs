@@ -16,7 +16,7 @@ namespace Levels
 
         public static GameLevel Instance { get; private set; }
 
-        [SerializeField] private CameraBehavior sceneCamera;
+        [SerializeField] protected CameraBehavior sceneCamera;
         
         
         public delegate void OnLevelStartedDelegate();
@@ -40,6 +40,7 @@ namespace Levels
         public void Start()
         {
             OnStart();
+            
             sceneCamera.OnIntroAnimationCompleted += OnIntroFinished;
 
             StartCoroutine(StartGameCoroutine());
@@ -128,8 +129,8 @@ namespace Levels
             OnLevelEnded?.Invoke();
         }
         
-        public void OnStart(){}
-        public void OnUpdate(){}
-        public void OnLevelStarting(){}
+        public abstract void OnStart();
+        public abstract void OnUpdate();
+        public abstract void OnLevelStarting();
     }
 }
