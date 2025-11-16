@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using Levels;
 using UnityEngine.Events;
 
 public class CameraBehavior : MonoBehaviour
@@ -19,7 +20,6 @@ public class CameraBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.Instance.OnLevelStarted += OnLevelStarted ;
         if (!pan || !player)
         {
             pan = GameObject.FindWithTag("Target").transform;
@@ -27,6 +27,15 @@ public class CameraBehavior : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (!(GameLevel.Instance is GameLevel)) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        
+        GameLevel.Instance.OnLevelStarted += OnLevelStarted;
+        
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {
@@ -34,6 +43,8 @@ public class CameraBehavior : MonoBehaviour
 
     public void OnLevelStarted()
     {
+        
+        print("CAMERABEHAVIOR : LEVELSTARTED");
         transform.position = pan.position + offset;
         
         transform.DOMove(player.position + offset, 10f).SetEase(Ease.InOutExpo).OnComplete(() =>
@@ -50,7 +61,7 @@ public class CameraBehavior : MonoBehaviour
             return;
         }
 
-        if (!GameManager.Instance.HasLevelStarted)
+        if (!GameManager.Instance.IsGameRunning)
         {
             return;
         }
@@ -73,4 +84,14 @@ public class CameraBehavior : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * damping);
         }
     }
+    
+    
+    private void OnDisable()
+    {
+        if (GameLevel.Instance != null)
+        {
+            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
+        }
+    }
+
 }
