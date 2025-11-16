@@ -22,11 +22,6 @@ public class CameraBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // if (!pan || !player)
-        // {
-        //     pan = GameObject.FindWithTag("Target").transform;
-        //     player = GameObject.FindWithTag("Player").transform;
-        // }
     }
 
     public void SetTargetPosition(Transform tp)

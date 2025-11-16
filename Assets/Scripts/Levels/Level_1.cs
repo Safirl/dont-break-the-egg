@@ -12,7 +12,6 @@ public class Level_1 : GameLevel
     
     public override void OnStart()
     {
-        print(GameObject.FindWithTag("Player"));
         panPosition = GameObject.FindWithTag("Target").transform;
         playerPosition = GameObject.FindWithTag("Player").transform;
         sceneCamera.SetTargetPosition(playerPosition);

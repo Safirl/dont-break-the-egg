@@ -49,7 +49,6 @@ namespace Levels
         private IEnumerator StartGameCoroutine()
         {
             yield return null; // Attend 1 frame pour que tous les objets soient initialisés
-            print("GAMELEVEL : On LevelStarting" + OnLevelStarted);
             OnLevelStarted?.Invoke();
 
         }
@@ -100,9 +99,11 @@ namespace Levels
                 case  EndingLevelStatus.WON:
                     SceneManager.LoadNextLevel(RequestScene.WIN);
                     break;
-                /*
-                 * handle special case for next level
-                 */
+                
+                
+                case  EndingLevelStatus.NEXT:
+                    SceneManager.LoadNextLevel(RequestScene.NEXT_SCENE);
+                    break;
                     
                     
                 default:

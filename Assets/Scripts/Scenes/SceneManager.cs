@@ -27,7 +27,6 @@ namespace Scenes
 
         public void LoadNextLevel(RequestScene requestedScene)
         {
-
             switch (requestedScene)
             {
                 case  RequestScene.LOSE:
@@ -45,7 +44,8 @@ namespace Scenes
                         throw new Exception("Level not defined in ScenesOrder ENUM. value: " +  nextLevelInt);
 
                     ChangeScene((ScenesOrder)nextLevelInt);
-                        
+                    currentLevel = (ScenesOrder)nextLevelInt;
+                    
                     break;
                     
                     

@@ -10,6 +10,7 @@ public class Level_win : GameLevel
 
     public override void OnStart()
     {
+        nextButton.onClick.RemoveAllListeners(); 
         nextButton.onClick.AddListener(OnButtonClicked);
     }
 
@@ -25,7 +26,7 @@ public class Level_win : GameLevel
 
     void OnButtonClicked()
     {
-        Debug.Log("Button pressed !");
+        EndLevel(true, EndingLevelStatus.NEXT);
     }
     
 }

@@ -812,6 +812,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7538163373124226783, guid: 9e246d0dd61f22644b71d9c85b9c3be5, type: 3}
   m_PrefabInstance: {fileID: 7085595238066589505}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2036140177
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5669493661975903686, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_Name
+      value: SceneManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 149.528
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 88.81461
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 2076752635}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+--- !u!114 &2036140178 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+  m_PrefabInstance: {fileID: 2036140177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bb43a7933345969894c36ece76acd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scenes.SceneManager
 --- !u!114 &2076752635 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
@@ -990,6 +1062,10 @@ PrefabInstance:
       propertyPath: sceneCamera
       value: 
       objectReference: {fileID: 1788725537}
+    - target: {fileID: 5593838252671789071, guid: 39935f28f3f9bac48aa6fd6b1f76c4f6, type: 3}
+      propertyPath: SceneManager
+      value: 
+      objectReference: {fileID: 2036140178}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1121,6 +1197,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2036140177}
   - {fileID: 3696742667380178635}
   - {fileID: 1663336269}
   - {fileID: 1348174594}
