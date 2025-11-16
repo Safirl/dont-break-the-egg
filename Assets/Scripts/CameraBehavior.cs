@@ -12,7 +12,7 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
-
+    public bool isDevMode;
     public delegate void OnIntroAnimationCompletedDelegate();
 
     public OnIntroAnimationCompletedDelegate OnIntroAnimationCompleted;
@@ -43,37 +43,44 @@ public class CameraBehavior : MonoBehaviour
 
     public void OnLevelStarted()
     {
-        
-        print("CAMERABEHAVIOR : LEVELSTARTED");
-        transform.position = pan.position + offset;
-        
-        transform.DOMove(player.position + offset, 10f).SetEase(Ease.InOutExpo).OnComplete(() =>
+
+        if (!isDevMode)
         {
+            
+            transform.position = pan.position + offset;
+            
+            transform.DOMove(player.position + offset, 10f).SetEase(Ease.InOutExpo)
+                .OnComplete(() => {
+                    OnIntroAnimationCompleted.Invoke();
+                });
+        } else {
+            transform.position = player.position + offset;
             OnIntroAnimationCompleted.Invoke();
-        });
+        }
+            
+            
+            
     }
 
     private void LateUpdate()
     {
+        print(GameManager.Instance.IsGameRunning);
+                
+        if (!GameManager.Instance.IsGameRunning) return;
+        
+        
         if (!player)
-        {
-            print("player or gameObject is null!");
-            return;
-        }
-
-        if (!GameManager.Instance.IsGameRunning)
-        {
-            return;
-        }
+            throw new Exception("Player or gameObject is null");
+        
         
         var targetPosition = player.position + offset;
-        //easing
+
         var compareDistSqr = .001f;
 
-        if (targetPosition == transform.position)
-        {
-            return;
-        }
+        
+        if (targetPosition == transform.position) return;
+        
+        
         
         if ((targetPosition - transform.position).sqrMagnitude <= compareDistSqr)
         {

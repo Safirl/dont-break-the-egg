@@ -17,19 +17,11 @@ public class GameManager : MonoBehaviour
     
     public int currentLevel = 0;
     public GameLevel Level;
-    // public delegate void OnLevelStartedDelegate();
-    // public delegate void OnLevelEndedDelegate();
-    //
-    // public OnLevelStartedDelegate OnLevelStarted;
-    // public OnLevelEndedDelegate OnLevelEnded;
+  
     
-    
-
     public float _totalTime { get; private set; } = 20;
     public bool IsGameRunning { get; private set; } = false;
-
-    // [SerializeField] private CameraBehavior sceneCamera;
-
+    
     public static GameManager Instance
     {
         get; private set;
@@ -51,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        IsGameRunning = true;
+        
         
         Level = FindObjectOfType<GameLevel>();
 
@@ -61,10 +55,6 @@ public class GameManager : MonoBehaviour
         Level.Start();
     }
     
-    public void OnIntroFinished()
-    {
-        IsGameRunning = true;
-    }
 
     // Update is called once per frame
     void Update()
