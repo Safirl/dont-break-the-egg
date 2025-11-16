@@ -1,0 +1,31 @@
+using System;
+using Levels;
+using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+
+public class Level_win : GameLevel
+{
+    public Button nextButton;
+
+    public override void OnStart()
+    {
+        nextButton.onClick.AddListener(OnButtonClicked);
+    }
+
+    public override void OnUpdate()
+    {
+
+    }
+
+    public override void OnLevelStarting()
+    {
+        
+    }
+
+    void OnButtonClicked()
+    {
+        Debug.Log("Button pressed !");
+    }
+    
+}
