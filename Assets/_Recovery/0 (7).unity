@@ -231,75 +231,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &118793454
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 762759375871528966, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: spline
-      value: 
-      objectReference: {fileID: 1354424461}
-    - target: {fileID: 762759375871528966, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: armPrefab
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -18.3265
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 11.31528
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6713116969097223496, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: m_Name
-      value: HandSnake
-      objectReference: {fileID: 0}
-    - target: {fileID: 7301186891719310620, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
-      propertyPath: spline
-      value: 
-      objectReference: {fileID: 1354424461}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
 --- !u!1 &332996946
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2483,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
+--- !u!1001 &7581207071960644461
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70585054
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7083608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471104949383323120, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: spline
+      value: 
+      objectReference: {fileID: 1354424461}
+    - target: {fileID: 6713116969097223496, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: m_Name
+      value: HandSnake
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2564,4 +2556,4 @@ SceneRoots:
   - {fileID: 1032581501}
   - {fileID: 1354424462}
   - {fileID: 1714147878}
-  - {fileID: 118793454}
+  - {fileID: 7581207071960644461}

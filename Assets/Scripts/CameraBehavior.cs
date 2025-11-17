@@ -94,7 +94,7 @@ public class CameraBehavior : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, newTargetPosition, Time.deltaTime * damping);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, 1 - Mathf.Exp(-damping * Time.deltaTime));
         }
     }
     
