@@ -50,12 +50,10 @@ public class GameManager : MonoBehaviour
     {
         IsGameRunning = true;
         
-        Level = FindObjectOfType<GameLevel>();
-        timeLeft = totalTime;
-        sceneCamera.OnIntroAnimationCompleted += OnIntroFinished;
-        StartCoroutine(StartGameCoroutine());
+        Level = FindFirstObjectByType<GameLevel>();
+        timeLeft = _totalTime;
 
-        if (!(Level is GameLevel))
+        if (!Level)
             throw new Exception("No Level found");
         
         Level.Start();
@@ -64,17 +62,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartGameCoroutine()
     {
         yield return null; // Attend 1 frame pour que tous les objets soient initialisés
-        StartGame();
+        // StartGame();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!HasLevelStarted) return;
+        if (!IsGameRunning) return;
         timeLeft -= Time.deltaTime;
-        print (timeLeft);
     }
-
 
 
     public void StartLevel()
