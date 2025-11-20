@@ -372,9 +372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 624721421267425503}
-  maxRadiusDistance: 1
-  stepDuration: 0.2
-  stepOvershootFraction: 0.75
+  maxRadiusDistance: 0.6
+  stepDuration: 0.15
+  stepOvershootFraction: 0.8
 --- !u!1 &906326434141939055
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,9 +420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 1181533066237373855}
-  maxRadiusDistance: 1
-  stepDuration: 0.2
-  stepOvershootFraction: 0.75
+  maxRadiusDistance: 0.6
+  stepDuration: 0.15
+  stepOvershootFraction: 0.8
 --- !u!1 &1089013891428144830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,9 +1148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 1697914671127915317}
-  maxRadiusDistance: 1
-  stepDuration: 0.2
-  stepOvershootFraction: 0.75
+  maxRadiusDistance: 0.6
+  stepDuration: 0.15
+  stepOvershootFraction: 0.8
 --- !u!1 &2965759926837680519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1209,7 @@ Transform:
   m_GameObject: {fileID: 3076675231185070687}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.65, y: 0, z: -4.67}
+  m_LocalPosition: {x: -2.59, y: 0.31, z: -5.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1520,9 +1520,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 8959052282484801292}
-  maxRadiusDistance: 1
-  stepDuration: 0.2
-  stepOvershootFraction: 0.75
+  maxRadiusDistance: 0.6
+  stepDuration: 0.15
+  stepOvershootFraction: 0.8
 --- !u!1 &4156783699460367215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,7 +2223,7 @@ Transform:
   m_GameObject: {fileID: 6142819674495258747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.28, y: 0, z: -4.25}
+  m_LocalPosition: {x: -1.96, y: 0, z: -4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2588,9 +2588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 3371534129196270603}
-  maxRadiusDistance: 1
-  stepDuration: 0.2
-  stepOvershootFraction: 0.75
+  maxRadiusDistance: 0.6
+  stepDuration: 0.15
+  stepOvershootFraction: 0.8
 --- !u!1 &8051714449352646016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,7 +2760,7 @@ Transform:
   m_GameObject: {fileID: 8400297353065713312}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.58, y: 0, z: -4.55}
+  m_LocalPosition: {x: -2.78, y: 0, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
