@@ -21,7 +21,6 @@ namespace Scenes
         public void Start()
         {
             currentLevel = gameManager.currentLevel;
-            
         } 
 
 

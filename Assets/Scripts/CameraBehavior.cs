@@ -31,7 +31,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void Awake()
     {
-        if (!(GameLevel.Instance is GameLevel)) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        if (!GameLevel.Instance) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
         
         GameLevel.Instance.OnLevelStarted += OnLevelStarted;
         
@@ -48,7 +48,6 @@ public class CameraBehavior : MonoBehaviour
 
         if (!isDevMode)
         {
-            
             transform.position = targetPosition.position + offset;
             
             transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
@@ -59,34 +58,24 @@ public class CameraBehavior : MonoBehaviour
         } else {
             transform.position = targetPosition.position + offset;
             OnIntroAnimationCompleted.Invoke();
-                    isIntroAnimationComplete = true;
+            isIntroAnimationComplete = true;
         }
-            
-            
-            
     }
 
     private void LateUpdate()
     {
-
-
         if (!GameManager.Instance.IsGameRunning) return;
-
-
+        
         if (!targetPosition)
         {
             targetPosition = new GameObject("FakeTarget").transform;
         }
         
-        
         Vector3 newTargetPosition = targetPosition.position + offset;
 
         float compareDistSqr = .001f;
-
         
         if (newTargetPosition == transform.position) return;
-        
-        
         
         if ((newTargetPosition - transform.position).sqrMagnitude <= compareDistSqr)
         {
@@ -94,7 +83,7 @@ public class CameraBehavior : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, newTargetPosition, Time.deltaTime * damping);
+            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 1 - Mathf.Exp(-damping * Time.deltaTime));
         }
     }
     
