@@ -35,12 +35,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        
         if (Instance && Instance != this) 
         { 
             Destroy(this); 
         } 
-        else 
+        else
         { 
             Instance = this; 
         }

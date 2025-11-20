@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FingerStepper : MonoBehaviour
 {
-    [SerializeField]  private Transform homeTransform;
+    [SerializeField] private Transform homeTransform;
     //How far the finger tip can get away from homeTransform
     [SerializeField] private float maxRadiusDistance;
     
