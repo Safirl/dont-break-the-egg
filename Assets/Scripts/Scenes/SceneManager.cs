@@ -18,8 +18,21 @@ namespace Scenes
         public GameManager gameManager;
         public Animator transition;
 
+        public static SceneManager Instance { get; private set; }
 
-        public void LoadNextLevel(Scenes requestedScene)
+        private void Awake()
+        {
+            if (Instance && Instance != this) 
+            { 
+                Destroy(this); 
+            } 
+            else
+            { 
+                Instance = this; 
+            }
+        }
+
+        public void LoadLevel(Scenes requestedScene)
         {
             if (requestedScene == CurrentScene)
             {
@@ -30,7 +43,27 @@ namespace Scenes
             if (requestedScene == Scenes.NEXT_LEVEL)
             {
                 var currentLevelIndex = Levels.FindIndex(x => x == CurrentLevel);
-                
+                //First level
+                if (currentLevelIndex == -1)
+                {
+                    CurrentLevel = Levels[0];
+                    StartCoroutine(TransitionScene(CurrentLevel.name));
+                }
+                //Last level
+                else if (currentLevelIndex + 1 == Levels.Count)
+                {
+                    CurrentLevel = Levels[currentLevelIndex+1];
+                    if (!CurrentLevel)
+                    {
+                        requestedScene = Scenes.WIN;
+                    }
+                }
+                else
+                {
+                    CurrentLevel = Levels[currentLevelIndex];
+                    StartCoroutine(TransitionScene(CurrentLevel.name));
+                    return;
+                }
             }
 
             var sceneName = MainScenes[requestedScene].name;;

@@ -19,42 +19,6 @@ public class EggBehavior : MonoBehaviour
     private float jumpDelay = .2f;
     private float jumpCooldown;
 
-    private void Start()
-    {
-        //GameLevel.Instance.OnLevelStarted += OnLevelStarted;
-        //GameLevel.Instance.OnLevelEnded += OnLevelEnded;
-    }
-
-    
-    private void OnEnable()
-    {
-        if (LevelManager.Instance != null)
-        {
-            LevelManager.Instance.OnLevelStarted += OnLevelStarted;
-            LevelManager.Instance.OnLevelEnded += OnLevelEnded;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (LevelManager.Instance != null)
-        {
-            LevelManager.Instance.OnLevelStarted -= OnLevelStarted;
-            LevelManager.Instance.OnLevelEnded -= OnLevelEnded;
-        }
-    }
-    
-        
-    private void OnLevelStarted()
-    {
-        // rigidBody.useGravity = true;
-    }
-    
-    private void OnLevelEnded()
-    {
-        // rigidBody.useGravity = true;
-    }
-
     private void Update()
     { 
         jumpCooldown += Time.deltaTime;
@@ -77,7 +41,7 @@ public class EggBehavior : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && jumpCooldown > jumpDelay)
         {
             Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit jumpHit, jumpDistance,collisionMask);
-            if (jumpHit.collider != null)
+            if (!jumpHit.collider)
             {
                 force.y += jumpStrength;
                 jumpCooldown = 0f;

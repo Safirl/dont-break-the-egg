@@ -11,7 +11,7 @@ public class LevelManagerLose : LevelManager
     public void Sta()
     {
         nextButton.onClick.RemoveAllListeners(); 
-        nextButton.onClick.AddListener(OnButtonClicked);
+        // nextButton.onClick.AddListener(OnButtonClicked);
     }
 
     // void OnButtonClicked()

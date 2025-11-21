@@ -12,41 +12,23 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
-    public bool isDevMode;
     public bool isIntroAnimationComplete = false;
 
     public delegate void OnIntroAnimationCompletedDelegate();
 
     public OnIntroAnimationCompletedDelegate OnIntroAnimationCompleted;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    public void SetTargetPosition(Transform tp)
-    {
-        targetPosition = tp;
-    }
-
     private void Awake()
     {
-        if (!LevelManager.Instance) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        if (!LevelManager.Instance) Debug.LogError("CAMERABEHAVIOR : GameLevel doesn't exist"); 
         
         LevelManager.Instance.OnLevelStarted += OnLevelStarted;
         
     }
-    
-    
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     public void OnLevelStarted()
     {
-
-        if (!isDevMode)
+        if (!GameManager.Instance.isDevMode)
         {
             transform.position = targetPosition.position + offset;
             
@@ -64,12 +46,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!GameManager.Instance.IsGameRunning) return;
-        
-        if (!targetPosition)
-        {
-            targetPosition = new GameObject("FakeTarget").transform;
-        }
+        if (!LevelManager.Instance.IsLevelRunning) return;
         
         Vector3 newTargetPosition = targetPosition.position + offset;
 
@@ -90,7 +67,7 @@ public class CameraBehavior : MonoBehaviour
     
     private void OnDisable()
     {
-        if (LevelManager.Instance != null)
+        if (!LevelManager.Instance)
         {
             LevelManager.Instance.OnLevelStarted -= OnLevelStarted;
         }

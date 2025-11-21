@@ -10,30 +10,31 @@ namespace Levels
         public static LevelManager Instance { get; private set; }
 
         [SerializeField] protected CameraBehavior sceneCamera;
-        
-        public delegate void OnLevelStartedDelegate();
-        public delegate void OnLevelEndedDelegate();
+        [SerializeField] private GameObject startZone;
+        [SerializeField] private GameObject endZone;
     
+        public delegate void OnLevelStartedDelegate();
         public OnLevelStartedDelegate OnLevelStarted;
+    
+        public delegate void OnLevelEndedDelegate();
         public OnLevelEndedDelegate OnLevelEnded;
         
-        private readonly float _totalTime = 20;
+        public readonly float TotalTime = 20;
         public float TimeLeft { get; private set; }
         public bool IsLevelRunning { get; private set; }
-        public SceneManager SceneManager;
         
         protected virtual void Awake()
         {
             if (Instance && Instance != this) 
             { 
-                Destroy(this); 
+                Destroy(this);
+                Debug.LogWarning("Another levelManager was found");
             } 
             else
             { 
                 Instance = this; 
             }
         }
-        
         
         public void Start()
         {
@@ -59,61 +60,21 @@ namespace Levels
             if (!IsLevelRunning) return;
             
             TimeLeft -= Time.deltaTime;
-            float v = _totalTime - Time.deltaTime;
+            float v = TotalTime - Time.deltaTime;
 
-
-            // if (v <= 0)
-            // {
-            //     EndLevel(false);
-            //     return;
-            // }   
-
-            TimeLeft = v > 0f ? v : 0f;
+            // TimeLeft = v > 0f ? v : 0f;
         }
 
         public void EndLevel(bool isWon)
         {
             IsLevelRunning = false;
             print("is won ? " + isWon);
-            
-
-            switch (cause)
-            {
-                case  EndingLevelStatus.BROKEN:
-                case  EndingLevelStatus.CATCHED:
-                case  EndingLevelStatus.TIMEOUT:
-                    SceneManager.LoadNextLevel(Scenes.Scenes.LOSE);
-                    break;
-                
-                case  EndingLevelStatus.WON:
-                    SceneManager.LoadNextLevel(Scenes.Scenes.WIN);
-                    break;
-                
-                
-                case  EndingLevelStatus.NEXT:
-                    SceneManager.LoadNextLevel(Scenes.Scenes.NEXT_LEVEL);
-                    break;
-                
-                case  EndingLevelStatus.RESUME:
-                    SceneManager.LoadNextLevel(Scenes.Scenes.SAME_LEVEL);
-                    break;
-                    
-                    
-                default:
-                    throw new Exception("ERROR: the end cause is not handled" +  cause);
-
-            }
+            SceneManager.Instance.LoadLevel(isWon ? Scenes.Scenes.WIN : Scenes.Scenes.LOSE);
         }
 
         public void StartLevel()
         {
             IsLevelRunning = true;
-        }
-
-        
-        public void Win()
-        {
-            EndLevel(true);
         }
 
         public void Lose()
