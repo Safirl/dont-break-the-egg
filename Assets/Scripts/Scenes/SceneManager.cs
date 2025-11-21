@@ -1,78 +1,51 @@
 ﻿
 using System;
 using UnityEngine;
-using UnityEngine.UIElements;
-using DG.Tweening;
-using Levels;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine.Serialization;
 
 namespace Scenes
 {
     public class SceneManager: MonoBehaviour
     {
 
-        private ScenesOrder currentScene;
-        private ScenesOrder currentLevel;
+        public SceneAsset CurrentLevel { get; private set; }
+        public List<SceneAsset> Levels {get; private set;}
+        public Dictionary<Scenes, SceneAsset> MainScenes {get; private set;}
+        public Scenes CurrentScene { get; private set; }
         public GameManager gameManager;
         public Animator transition;
-        
-        public void Start()
-        {
-            currentLevel = gameManager.currentLevel;
-        } 
 
 
-        public void LoadNextLevel(RequestScene requestedScene)
+        public void LoadNextLevel(Scenes requestedScene)
         {
-            switch (requestedScene)
+            if (requestedScene == CurrentScene)
             {
-                case  RequestScene.LOSE:
-                    ChangeScene(ScenesOrder.LOSING);
-                    break;
-                
-                case  RequestScene.SAME_SCENE:
-                    ChangeScene(currentLevel);
-                    break;
-
-                
-                case  RequestScene.WIN:
-                    ChangeScene(ScenesOrder.WINNING);
-                    break;
-                
-                case  RequestScene.NEXT_SCENE:
-                    int nextLevelInt = (int)currentLevel + 1;
-
-                    if (!System.Enum.IsDefined(typeof(ScenesOrder), nextLevelInt))
-                        throw new Exception("Level not defined in ScenesOrder ENUM. value: " +  nextLevelInt);
-
-                    ChangeScene((ScenesOrder)nextLevelInt);
-                    currentLevel = (ScenesOrder)nextLevelInt;
-                    
-                    break;
-                    
-                    
-                default:
-                    throw new Exception("ERROR: Requested scene is not handled" +  requestedScene);
-                        
-                    
-                    
+                Debug.LogWarning("Scene " + CurrentScene + " is already loaded");
+                return;
             }
 
+            if (requestedScene == Scenes.NEXT_LEVEL)
+            {
+                var currentLevelIndex = Levels.FindIndex(x => x == CurrentLevel);
+                
+            }
+
+            var sceneName = MainScenes[requestedScene].name;;
+            if (sceneName == "")
+            {
+                Debug.LogError("Scene " + requestedScene + " doesn't exist");
+            }
+            StartCoroutine(TransitionScene(sceneName));
         }
 
-        private void ChangeScene(ScenesOrder scene)
-        {
-
-            StartCoroutine(TransitionScene(scene));
-        }
-
-        private IEnumerator TransitionScene(ScenesOrder scene)
+        private IEnumerator TransitionScene(string sceneName)
         {
             transition.SetTrigger("ChangeScene");
             yield return new WaitForSeconds(1);
-            UnityEngine.SceneManagement.SceneManager.LoadScene((int)scene);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
     }
 }

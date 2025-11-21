@@ -42,7 +42,7 @@ public class HandBehavior : MonoBehaviour
         if (!spline) return;
         
         float timeLeft = GameManager.Instance.timeLeft +  timeOffset;
-        float totalTime = GameManager.Instance._totalTime +  timeOffset;
+        float totalTime = GameManager.Instance.TotalTime +  timeOffset;
         t = (totalTime - timeLeft) / totalTime;
 
         spline.Spline.Evaluate(t, out var pos, out var tan, out var up);

@@ -5,33 +5,28 @@ using System.Collections.Generic;
 using Levels;
 using Scenes;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine.Events;
-
+using UnityEngine.Serialization;
 
 
 public class GameManager : MonoBehaviour
 {
+    public LevelManager levelManager;
+    // public ScenesOrder currentScene = ScenesOrder.LEVEL_1;
     
-    public ScenesOrder currentLevel = ScenesOrder.LEVEL_1;
-    public GameLevel Level;
-    public ScenesOrder currentScene = ScenesOrder.LEVEL_1;
-    
-    public float _totalTime { get; private set; } = 20;
-    public bool IsGameRunning { get; private set; } = false;
+    public float TotalTime { get; private set; } = 20;
 
     // public UnityEvent onLevelStarted = new UnityEvent();
     // public UnityEvent onLevelEnded = new UnityEvent();
-
-    public float timeLeft { get; private set; }
-
+    
     [SerializeField] private CameraBehavior sceneCamera;
 
     public static GameManager Instance
     {
         get; private set;
     }
-    
 
     private void Awake()
     {
@@ -47,15 +42,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        IsGameRunning = true;
-        
-        Level = FindFirstObjectByType<GameLevel>();
-        timeLeft = _totalTime;
+        levelManager = FindFirstObjectByType<LevelManager>();
+        timeLeft = TotalTime;
 
-        if (!Level)
+        if (!levelManager)
             throw new Exception("No Level found");
         
-        Level.Start();
+        levelManager.Start();
     }
     
     private IEnumerator StartGameCoroutine()
@@ -64,29 +57,21 @@ public class GameManager : MonoBehaviour
         // StartGame();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!IsGameRunning) return;
-        timeLeft -= Time.deltaTime;
-    }
-
 
     public void StartLevel()
     {
-        Level.StartLevel();
+        if (!levelManager) return;
+        levelManager.StartLevel();
     }
     public void WinLevel()
     {
-        if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
-        
-        Level.Win();
+        if (!levelManager) return;
+        levelManager.Win();
     }
 
-    public  void LoseLevel(EndingLevelStatus cause)
+    public  void LoseLevel()
     {
-        if(!(Level is GameLevel)) throw new Exception("level doesn't exist, level : " + currentLevel, null);
-        
-        Level.Lose(cause);
+        if (!levelManager) return;
+        levelManager.Lose();
     }
 }

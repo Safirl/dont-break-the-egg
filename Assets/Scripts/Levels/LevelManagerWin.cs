@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Level_lose : GameLevel
+public class LevelManagerWin : LevelManager
 {
     public Button nextButton;
 
@@ -26,7 +26,7 @@ public class Level_lose : GameLevel
 
     void OnButtonClicked()
     {
-        EndLevel(true, EndingLevelStatus.RESUME);
+        EndLevel(true, EndingLevelStatus.NEXT);
     }
     
 }

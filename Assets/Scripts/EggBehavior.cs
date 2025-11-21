@@ -28,19 +28,19 @@ public class EggBehavior : MonoBehaviour
     
     private void OnEnable()
     {
-        if (GameLevel.Instance != null)
+        if (LevelManager.Instance != null)
         {
-            GameLevel.Instance.OnLevelStarted += OnLevelStarted;
-            GameLevel.Instance.OnLevelEnded += OnLevelEnded;
+            LevelManager.Instance.OnLevelStarted += OnLevelStarted;
+            LevelManager.Instance.OnLevelEnded += OnLevelEnded;
         }
     }
 
     private void OnDisable()
     {
-        if (GameLevel.Instance != null)
+        if (LevelManager.Instance != null)
         {
-            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
-            GameLevel.Instance.OnLevelEnded -= OnLevelEnded;
+            LevelManager.Instance.OnLevelStarted -= OnLevelStarted;
+            LevelManager.Instance.OnLevelEnded -= OnLevelEnded;
         }
     }
     
@@ -63,7 +63,7 @@ public class EggBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GameLevel.Instance && !GameLevel.Instance.IsLevelRunning) return;
+        if (LevelManager.Instance && !LevelManager.Instance.IsLevelRunning) return;
         
         var force = Vector3.zero;
         //If the player is to high, we don't want to allow movements

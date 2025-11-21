@@ -31,9 +31,9 @@ public class CameraBehavior : MonoBehaviour
 
     private void Awake()
     {
-        if (!GameLevel.Instance) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        if (!LevelManager.Instance) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
         
-        GameLevel.Instance.OnLevelStarted += OnLevelStarted;
+        LevelManager.Instance.OnLevelStarted += OnLevelStarted;
         
     }
     
@@ -90,9 +90,9 @@ public class CameraBehavior : MonoBehaviour
     
     private void OnDisable()
     {
-        if (GameLevel.Instance != null)
+        if (LevelManager.Instance != null)
         {
-            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
+            LevelManager.Instance.OnLevelStarted -= OnLevelStarted;
         }
     }
 
