@@ -22,37 +22,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
+        if (Instance && Instance != this)
+        {
+            Destroy(this);
+        }
         else
-        { 
-            Instance = this; 
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
-    
-    private IEnumerator StartGameCoroutine()
-    {
-        yield return null; // Attend 1 frame pour que tous les objets soient initialisés
-        // StartGame();
-    }
-    //
-    //
-    // public void StartLevel()
-    // {
-    //     if (!levelManager) return;
-    //     levelManager.StartLevel();
-    // }
-    // public void WinLevel()
-    // {
-    //     if (!levelManager) return;
-    //     levelManager.Win();
-    // }
-    //
-    // public  void LoseLevel()
-    // {
-    //     if (!levelManager) return;
-    //     levelManager.Lose();
-    // }
 }

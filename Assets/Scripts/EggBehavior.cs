@@ -27,7 +27,7 @@ public class EggBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (LevelManager.Instance && !LevelManager.Instance.IsLevelRunning) return;
+        if (Level.Instance && !Level.Instance.IsLevelInitialized) return;
         
         var force = Vector3.zero;
         //If the player is to high, we don't want to allow movements

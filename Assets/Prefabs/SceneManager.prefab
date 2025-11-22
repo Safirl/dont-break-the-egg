@@ -258,5 +258,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bb43a7933345969894c36ece76acd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scenes.SceneManager
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
   transition: {fileID: 529204129159397971}

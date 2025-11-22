@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class LevelManagerLose : LevelManager
+public class LevelLose : Level
 {
     public Button nextButton;
 

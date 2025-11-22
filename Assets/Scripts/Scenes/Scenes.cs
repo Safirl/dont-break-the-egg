@@ -1,4 +1,4 @@
-﻿namespace Scenes
+namespace Scenes
 {
     public enum Scenes
     {

@@ -12,41 +12,36 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
-    public bool isIntroAnimationComplete = false;
 
     public delegate void OnIntroAnimationCompletedDelegate();
 
     public OnIntroAnimationCompletedDelegate OnIntroAnimationCompleted;
 
-    private void Awake()
+    private void Start()
     {
-        if (!LevelManager.Instance) Debug.LogError("CAMERABEHAVIOR : GameLevel doesn't exist"); 
-        
-        LevelManager.Instance.OnLevelStarted += OnLevelStarted;
-        
+        if (!Level.Instance) Debug.LogError("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        Level.Instance.OnLevelStarted += OnLevelStarted;
     }
 
     public void OnLevelStarted()
     {
+        Level.Instance.OnLevelStarted -= OnLevelStarted;
         if (!GameManager.Instance.isDevMode)
         {
-            transform.position = targetPosition.position + offset;
-            
+            // transform.position = targetPosition.position + offset;
             transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
                 .OnComplete(() => {
                     OnIntroAnimationCompleted.Invoke();
-                    isIntroAnimationComplete = true;
                 });
         } else {
             transform.position = targetPosition.position + offset;
             OnIntroAnimationCompleted.Invoke();
-            isIntroAnimationComplete = true;
         }
     }
 
     private void LateUpdate()
     {
-        if (!LevelManager.Instance.IsLevelRunning) return;
+        if (!Level.Instance.IsLevelInitialized) return;
         
         Vector3 newTargetPosition = targetPosition.position + offset;
 
@@ -60,16 +55,16 @@ public class CameraBehavior : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 1 - Mathf.Exp(-damping * Time.deltaTime));
+            transform.position = Vector3.Lerp(transform.position, newTargetPosition, 1 - Mathf.Exp(-damping * Time.deltaTime));
         }
     }
     
     
     private void OnDisable()
     {
-        if (!LevelManager.Instance)
+        if (!Level.Instance)
         {
-            LevelManager.Instance.OnLevelStarted -= OnLevelStarted;
+            Level.Instance.OnLevelStarted -= OnLevelStarted;
         }
     }
 
