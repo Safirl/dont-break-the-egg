@@ -1,0 +1,7 @@
+﻿By tweaking these values you can have different result closer to water.
+power : 5.3
+scale : 2.02
+
+For a waterfall : 
+agitation : 8
+speed.y : 4
