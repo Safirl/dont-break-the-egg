@@ -18,7 +18,7 @@ namespace Levels
         public delegate void OnLevelStartedDelegate();
         public OnLevelStartedDelegate OnLevelStarted;
     
-        public delegate void OnLevelEndedDelegate();
+        public delegate void OnLevelEndedDelegate(Scenes.Scenes nextScene);
         public OnLevelEndedDelegate OnLevelEnded;
         
         public readonly float TotalTime = 20;
@@ -82,6 +82,7 @@ namespace Levels
         {
             targetZone.OnZoneEntered -= OnPlayerReachedEnd;
             IsLevelInitialized = false;
+            OnLevelEnded?.Invoke(Scenes.Scenes.WIN);
         }
 
         public void Update()
@@ -89,20 +90,6 @@ namespace Levels
             if (!IsPlayerRunning) return;
             
             TimeLeft -= Time.deltaTime;
-            print(TimeLeft);
-        }
-
-        public void EndLevel(bool isWon)
-        {
-            IsLevelInitialized = false;
-            print("is won ? " + isWon);
-            LevelManager.Instance.LoadLevel(isWon ? Scenes.Scenes.WIN : Scenes.Scenes.LOSE);
-        }
-
-        public void Lose()
-        {
-            EndLevel(false);
-            OnLevelEnded?.Invoke();
         }
     }
 }

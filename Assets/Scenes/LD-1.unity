@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: armPrefab
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 762759375871528966, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
+      propertyPath: timeOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1225160228289796642, guid: 15be36e9c5c5e1ff2950e2794e7c6277, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.3265
@@ -2608,6 +2612,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: winScene
+      value: 
+      objectReference: {fileID: 102900000, guid: 33b5bb246d846ee4a9ef92c637e8e080, type: 3}
+    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
+      propertyPath: loseScene
+      value: 
+      objectReference: {fileID: 102900000, guid: bcd3c49786f6ea7478b0ea7934f64aa8, type: 3}
+    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
       propertyPath: Levels.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2674,7 +2686,7 @@ PrefabInstance:
       objectReference: {fileID: 87278309}
     - target: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
       propertyPath: isDevMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
       propertyPath: sceneCamera

@@ -1,14 +1,4 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
-using Levels;
-using Scenes;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.PackageManager;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 
 public class GameManager : MonoBehaviour
