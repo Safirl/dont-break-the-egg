@@ -16,8 +16,9 @@ namespace Scenes
         [SerializeField] private SceneAsset loseScene;
 
         public Scenes CurrentScene { get; private set; } = Scenes.NONE;
-        public GameManager gameManager;
-        public Animator transition;
+        private string nextSceneName;
+        [SerializeField] private Animator transition;
+        [SerializeField] private TransitionAnimation transitionAnimation;
 
         public static LevelManager Instance { get; private set; }
 
@@ -31,16 +32,19 @@ namespace Scenes
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            if (!transitionAnimation) transitionAnimation = GetComponentInChildren<TransitionAnimation>();
+            if (!transition) transition = GetComponentInChildren<Animator>();
             SceneManager.sceneLoaded += (scene, mode) =>
             {
+                transition.SetTrigger("FadeOut");
                 BindToLevelDelegates();
             };
             
             //For development perspectives, if we are directly in a level we want to assign it
-            if (!Level.Instance || !GameManager.Instance.isDevMode) return;
+            if (!Level.Instance || !GameManager.Instance || !GameManager.Instance.isDevMode) return;
             BindToLevelDelegates();
         }
-        private void BindToLevelDelegates()
+        public void BindToLevelDelegates()
         {
             if (!Level.Instance) return;
             print("binding level delegates");
@@ -49,7 +53,7 @@ namespace Scenes
             Level.Instance.OnLevelEnded += OnLevelEnded;
         }
 
-        private void OnLevelEnded(Scenes nextScene)
+        public void OnLevelEnded(Scenes nextScene)
         {
             Level.Instance.OnLevelEnded -= OnLevelEnded;
             LoadLevel(nextScene);
@@ -71,7 +75,7 @@ namespace Scenes
                     //First level
                     if (!CurrentLevel)
                     {
-                        StartCoroutine(TransitionScene(Levels[0].name));
+                        TransitionScene(Levels[0].name);
                     }
                     //Last level
                     var currentLevelIndex = Levels.FindIndex(x => x == CurrentLevel);
@@ -83,30 +87,41 @@ namespace Scenes
                     else
                     {
                         // CurrentLevel = Levels[currentLevelIndex + 1];
-                        StartCoroutine(TransitionScene(Levels[currentLevelIndex + 1].name));
+                        TransitionScene(Levels[currentLevelIndex + 1].name);
                     }
 
                     break;
                 }
                 case Scenes.SAME_LEVEL:
-                    StartCoroutine(TransitionScene(CurrentLevel.name));
+                    TransitionScene(CurrentLevel.name);
                     break;
                 case Scenes.LOSE:
-                    StartCoroutine(TransitionScene(loseScene.name));
+                    TransitionScene(loseScene.name);
                     break;
                 case Scenes.WIN:
-                    StartCoroutine(TransitionScene(winScene.name));
+                    TransitionScene(winScene.name);
                     break;
             }
 
             CurrentScene = requestedScene;
         }
 
-        private IEnumerator TransitionScene(string sceneName)
+        private void TransitionScene(string sceneName)
         {
+            if (!transition || !transitionAnimation)
+            {
+                Debug.LogError("transition animation not set");
+                return;
+            };
+            nextSceneName = sceneName;
+            transitionAnimation.FadeOutTransitionOver += LoadNextScene;
             transition.SetTrigger("ChangeScene");
-            yield return new WaitForSeconds(1);
-            SceneManager.LoadScene(sceneName);
+        }
+
+        public void LoadNextScene()
+        {
+            transitionAnimation.FadeOutTransitionOver -= LoadNextScene;
+            SceneManager.LoadScene(nextSceneName);
         }
     }
 }

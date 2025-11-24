@@ -19,7 +19,11 @@ public class CameraBehavior : MonoBehaviour
 
     private void Start()
     {
-        if (!Level.Instance) Debug.LogError("CAMERABEHAVIOR : GameLevel doesn't exist"); 
+        if (!Level.Instance)
+        {
+            Debug.LogWarning("CAMERABEHAVIOR : GameLevel doesn't exist");
+            return; 
+        }
         Level.Instance.OnLevelStarted += OnLevelStarted;
     }
 
@@ -41,7 +45,8 @@ public class CameraBehavior : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!Level.Instance.IsLevelInitialized) return;
+        if (!Level.Instance || Level.Instance.IsLevelInitialized) return;
+        if (!targetPosition) return;
         
         Vector3 newTargetPosition = targetPosition.position + offset;
 

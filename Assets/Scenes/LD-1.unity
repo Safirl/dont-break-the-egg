@@ -2569,7 +2569,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5669493661975903686, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
       propertyPath: m_Name
-      value: SceneManager
+      value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 7089758609025178060, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2611,22 +2611,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
-      propertyPath: winScene
-      value: 
-      objectReference: {fileID: 102900000, guid: 33b5bb246d846ee4a9ef92c637e8e080, type: 3}
-    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
-      propertyPath: loseScene
-      value: 
-      objectReference: {fileID: 102900000, guid: bcd3c49786f6ea7478b0ea7934f64aa8, type: 3}
-    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
-      propertyPath: Levels.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400633316824862951, guid: 3e52fe8d4b8278148bc6180857fbbb7e, type: 3}
-      propertyPath: 'Levels.Array.data[0]'
-      value: 
-      objectReference: {fileID: 102900000, guid: e6f889a128df83f7f819fa843ddda8d5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

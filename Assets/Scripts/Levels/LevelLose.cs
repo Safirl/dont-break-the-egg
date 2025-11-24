@@ -8,15 +8,16 @@ public class LevelLose : Level
 {
     public Button nextButton;
 
-    public void Sta()
+    public new void Start()
     {
-        nextButton.onClick.RemoveAllListeners(); 
-        // nextButton.onClick.AddListener(OnButtonClicked);
+        // nextButton.onClick.RemoveAllListeners(); 
+        nextButton.onClick.AddListener(OnButtonClicked);
     }
 
-    // void OnButtonClicked()
-    // {
-    //     EndLevel(true, EndingLevelStatus.RESUME);
-    // }
+    void OnButtonClicked()
+    {
+        nextButton.onClick.RemoveListener(OnButtonClicked);
+        OnLevelEnded?.Invoke(Scenes.Scenes.SAME_LEVEL);
+    }
     
 }

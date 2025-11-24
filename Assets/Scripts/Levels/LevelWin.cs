@@ -9,15 +9,15 @@ public class LevelWin : Level
 {
     public Button nextButton;
 
-    // private void Start()
-    // {
-    //     nextButton.onClick.RemoveAllListeners(); 
-    //     nextButton.onClick.AddListener(OnButtonClicked);
-    // }
+    public new void Start()
+    {
+        nextButton.onClick.AddListener(OnButtonClicked);
+    }
 
-    // void OnButtonClicked()
-    // {
-    //     EndLevel(true, EndingLevelStatus.NEXT);
-    // }
+    void OnButtonClicked()
+    {
+        nextButton.onClick.RemoveListener(OnButtonClicked);
+        OnLevelEnded?.Invoke(Scenes.Scenes.NEXT_LEVEL);
+    }
     
 }

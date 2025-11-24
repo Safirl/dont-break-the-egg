@@ -78,10 +78,11 @@ namespace Levels
             IsPlayerRunning = true;
         }
         
-        private void OnPlayerReachedEnd()
+        public virtual void OnPlayerReachedEnd()
         {
             targetZone.OnZoneEntered -= OnPlayerReachedEnd;
-            IsLevelInitialized = false;
+            IsPlayerRunning = false;
+            // IsLevelInitialized = false;
             OnLevelEnded?.Invoke(Scenes.Scenes.WIN);
         }
 
