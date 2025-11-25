@@ -45,7 +45,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!Level.Instance || Level.Instance.IsLevelInitialized) return;
+        if (!Level.Instance || !Level.Instance.IsPlayerRunning) return;
         if (!targetPosition) return;
         
         Vector3 newTargetPosition = targetPosition.position + offset;

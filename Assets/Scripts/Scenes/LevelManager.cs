@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Levels;
@@ -36,20 +37,24 @@ namespace Scenes
             if (!transition) transition = GetComponentInChildren<Animator>();
             SceneManager.sceneLoaded += (scene, mode) =>
             {
-                transition.SetTrigger("FadeOut");
+                transition.ResetTrigger("fadeOut");
+                transition.SetTrigger("fadeIn");
                 BindToLevelDelegates();
             };
-            
-            //For development perspectives, if we are directly in a level we want to assign it
-            if (!Level.Instance || !GameManager.Instance || !GameManager.Instance.isDevMode) return;
-            BindToLevelDelegates();
         }
+
+        private void Start()
+        {
+            //If we are directly in a level we want to assign it
+            if (!Level.Instance) return;
+            BindToLevelDelegates();
+            var currentScene = SceneManager.GetActiveScene();
+            CurrentLevel = Levels.Find(x => x.name == currentScene.name);
+        }
+
         public void BindToLevelDelegates()
         {
             if (!Level.Instance) return;
-            print("binding level delegates");
-            var currentScene = SceneManager.GetActiveScene();
-            CurrentLevel = Levels.Find(x => x.name == currentScene.name);
             Level.Instance.OnLevelEnded += OnLevelEnded;
         }
 
@@ -75,17 +80,20 @@ namespace Scenes
                     //First level
                     if (!CurrentLevel)
                     {
-                        TransitionScene(Levels[0].name);
+                        CurrentLevel = Levels[0];
+                        TransitionScene(CurrentLevel.name);
                     }
                     //Last level
                     var currentLevelIndex = Levels.FindIndex(x => x == CurrentLevel);
                     if (currentLevelIndex == Levels.Count - 1)
                     {
+                        print("end of the game");
                         //@TODO
                         //Trigger win event
                     }
                     else
                     {
+                        CurrentLevel = Levels[currentLevelIndex + 1];
                         // CurrentLevel = Levels[currentLevelIndex + 1];
                         TransitionScene(Levels[currentLevelIndex + 1].name);
                     }
@@ -115,7 +123,8 @@ namespace Scenes
             };
             nextSceneName = sceneName;
             transitionAnimation.FadeOutTransitionOver += LoadNextScene;
-            transition.SetTrigger("ChangeScene");
+            transition.ResetTrigger("fadeIn");
+            transition.SetTrigger("fadeOut");
         }
 
         public void LoadNextScene()

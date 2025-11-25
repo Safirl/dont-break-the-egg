@@ -9,7 +9,7 @@ namespace Levels
         public void OnFadeOutTransitionOver()
         {
             FadeOutTransitionOver?.Invoke();
-            // print("transition over");
+            print("transition over");
         }
     }
 }
