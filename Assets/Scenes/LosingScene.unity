@@ -333,7 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level_win
   sceneCamera: {fileID: 739458898}
-  SceneManager: {fileID: 1127928088}
+  startZone: {fileID: 0}
+  targetZone: {fileID: 0}
   nextButton: {fileID: 1926840745}
 --- !u!1001 &715064297
 PrefabInstance:

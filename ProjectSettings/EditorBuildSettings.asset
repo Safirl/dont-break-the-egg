@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/emilien_tests_2.unity
     guid: e2bc3fab3e300a640bcb3ffc779d2623
+  - enabled: 1
+    path: Assets/Scenes/LD-1.unity
+    guid: e6f889a128df83f7f819fa843ddda8d5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

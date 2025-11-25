@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
+using Levels;
 
 
 enum FingerState {
@@ -41,8 +42,8 @@ public class HandBehavior : MonoBehaviour
     {
         if (!spline) return;
         
-        float timeLeft = GameManager.Instance.timeLeft +  timeOffset;
-        float totalTime = GameManager.Instance._totalTime +  timeOffset;
+        var timeLeft = Level.Instance.TimeLeft +  timeOffset;
+        var totalTime = Level.Instance.TotalTime +  timeOffset;
         t = (totalTime - timeLeft) / totalTime;
 
         spline.Spline.Evaluate(t, out var pos, out var tan, out var up);

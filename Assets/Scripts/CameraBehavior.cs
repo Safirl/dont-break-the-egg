@@ -12,64 +12,41 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
-    public bool isDevMode;
-    public bool isIntroAnimationComplete = false;
 
     public delegate void OnIntroAnimationCompletedDelegate();
 
     public OnIntroAnimationCompletedDelegate OnIntroAnimationCompleted;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-    }
-
-    public void SetTargetPosition(Transform tp)
-    {
-        targetPosition = tp;
-    }
-
-    private void Awake()
-    {
-        if (!GameLevel.Instance) throw new Exception("CAMERABEHAVIOR : GameLevel doesn't exist"); 
-        
-        GameLevel.Instance.OnLevelStarted += OnLevelStarted;
-        
-    }
-    
-    
-    // Update is called once per frame
-    void Update()
-    {
+        if (!Level.Instance)
+        {
+            Debug.LogWarning("CAMERABEHAVIOR : GameLevel doesn't exist");
+            return; 
+        }
+        Level.Instance.OnLevelStarted += OnLevelStarted;
     }
 
     public void OnLevelStarted()
     {
-
-        if (!isDevMode)
+        Level.Instance.OnLevelStarted -= OnLevelStarted;
+        if (!GameManager.Instance.isDevMode)
         {
-            transform.position = targetPosition.position + offset;
-            
+            // transform.position = targetPosition.position + offset;
             transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
                 .OnComplete(() => {
                     OnIntroAnimationCompleted.Invoke();
-                    isIntroAnimationComplete = true;
                 });
         } else {
             transform.position = targetPosition.position + offset;
             OnIntroAnimationCompleted.Invoke();
-            isIntroAnimationComplete = true;
         }
     }
 
     private void LateUpdate()
     {
-        if (!GameManager.Instance.IsGameRunning) return;
-        
-        if (!targetPosition)
-        {
-            targetPosition = new GameObject("FakeTarget").transform;
-        }
+        if (!Level.Instance || !Level.Instance.IsPlayerRunning) return;
+        if (!targetPosition) return;
         
         Vector3 newTargetPosition = targetPosition.position + offset;
 
@@ -83,16 +60,16 @@ public class CameraBehavior : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 1 - Mathf.Exp(-damping * Time.deltaTime));
+            transform.position = Vector3.Lerp(transform.position, newTargetPosition, 1 - Mathf.Exp(-damping * Time.deltaTime));
         }
     }
     
     
     private void OnDisable()
     {
-        if (GameLevel.Instance != null)
+        if (!Level.Instance)
         {
-            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
+            Level.Instance.OnLevelStarted -= OnLevelStarted;
         }
     }
 

@@ -19,42 +19,6 @@ public class EggBehavior : MonoBehaviour
     private float jumpDelay = .2f;
     private float jumpCooldown;
 
-    private void Start()
-    {
-        //GameLevel.Instance.OnLevelStarted += OnLevelStarted;
-        //GameLevel.Instance.OnLevelEnded += OnLevelEnded;
-    }
-
-    
-    private void OnEnable()
-    {
-        if (GameLevel.Instance != null)
-        {
-            GameLevel.Instance.OnLevelStarted += OnLevelStarted;
-            GameLevel.Instance.OnLevelEnded += OnLevelEnded;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (GameLevel.Instance != null)
-        {
-            GameLevel.Instance.OnLevelStarted -= OnLevelStarted;
-            GameLevel.Instance.OnLevelEnded -= OnLevelEnded;
-        }
-    }
-    
-        
-    private void OnLevelStarted()
-    {
-        // rigidBody.useGravity = true;
-    }
-    
-    private void OnLevelEnded()
-    {
-        // rigidBody.useGravity = true;
-    }
-
     private void Update()
     { 
         jumpCooldown += Time.deltaTime;
@@ -63,7 +27,7 @@ public class EggBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GameLevel.Instance && !GameLevel.Instance.IsLevelRunning) return;
+        if (Level.Instance && !Level.Instance.IsLevelInitialized) return;
         
         var force = Vector3.zero;
         //If the player is to high, we don't want to allow movements
@@ -77,7 +41,7 @@ public class EggBehavior : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && jumpCooldown > jumpDelay)
         {
             Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit jumpHit, jumpDistance,collisionMask);
-            if (jumpHit.collider != null)
+            if (!jumpHit.collider)
             {
                 force.y += jumpStrength;
                 jumpCooldown = 0f;
