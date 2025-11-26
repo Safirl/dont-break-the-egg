@@ -14,7 +14,11 @@ namespace Levels
         [SerializeField] protected CameraBehavior sceneCamera;
         [SerializeField] private StartZone startZone;
         [FormerlySerializedAs("endZone")] [SerializeField] private TargetZone targetZone;
-    
+
+        [SerializeField] private float killedAnimationDuration = 3f;
+        public delegate void OnPlayerKilledDelegate();
+        public OnPlayerKilledDelegate OnPlayerKilled;
+        
         public delegate void OnLevelStartedDelegate();
         public OnLevelStartedDelegate OnLevelStarted;
     
@@ -91,6 +95,23 @@ namespace Levels
             if (!IsPlayerRunning) return;
             
             TimeLeft -= Time.deltaTime;
+        }
+
+        public void KillPlayer()
+        {
+            if (!IsLevelInitialized || !IsPlayerRunning) return;
+            IsPlayerRunning = false;
+            IsLevelInitialized = false;
+            OnPlayerKilled?.Invoke();
+            //@TODO Trigger the end animation (camera movement, player broken etc. whatever)
+            // Instead of triggering the coroutine we could wait for a callback.
+            StartCoroutine(KillPlayerCoroutine());
+        }
+
+        IEnumerator KillPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(killedAnimationDuration);
+            OnLevelEnded?.Invoke(Scenes.Scenes.LOSE);
         }
     }
 }
