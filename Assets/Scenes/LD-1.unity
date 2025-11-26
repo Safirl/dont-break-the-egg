@@ -694,15 +694,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1086212328690127391, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -2.17
       objectReference: {fileID: 0}
     - target: {fileID: 1086212328690127391, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 49.8
+      value: 18.64
       objectReference: {fileID: 0}
     - target: {fileID: 1086212328690127391, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -108
+      value: 41.19
       objectReference: {fileID: 0}
     - target: {fileID: 1086212328690127391, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2670,7 +2670,7 @@ PrefabInstance:
       objectReference: {fileID: 87278309}
     - target: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
       propertyPath: isDevMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
       propertyPath: sceneCamera
