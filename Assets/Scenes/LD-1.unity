@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc08f8b0c4041eb87fe9be1f5613b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zones.StartZone
-  GameManager: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
 --- !u!1001 &118793454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -743,6 +742,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2132875503221153408, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
+      propertyPath: strength
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132875503221153408, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
+      propertyPath: maxVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7271559557005162673, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
       propertyPath: m_Name
       value: Egg
@@ -1027,7 +1034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ba9f4fcabe44e19fe9bca2981e7d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zones.TargetZone
-  GameManager: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
 --- !u!1 &898318677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,22 +1707,22 @@ MonoBehaviour:
     m_Knots:
     - Position:
         x: -0.022877872
-        y: 0.003648758
-        z: 24.133236
+        y: 0
+        z: 15.323238
       TangentIn:
         x: 0
         y: 0
-        z: -40.33932
+        z: -24.470604
       TangentOut:
         x: 0
         y: 0
-        z: 40.33932
+        z: 24.470604
       Rotation:
         value:
-          x: 0.000059708465
-          y: 0.9970251
-          z: -0.000049976676
-          w: -0.077077396
+          x: 0.00006311565
+          y: 0.99702674
+          z: -0.0000048779402
+          w: -0.077055976
     - Position:
         x: -0.8228779
         y: -8.440001
@@ -1724,17 +1730,17 @@ MonoBehaviour:
       TangentIn:
         x: 0
         y: 0
-        z: -11.474456
+        z: -15.700146
       TangentOut:
         x: 0
         y: 0
-        z: 3.3780031
+        z: 5.2227693
       Rotation:
         value:
-          x: 0.021094237
-          y: 0.99249643
-          z: -0.033775568
-          w: -0.115607835
+          x: 0.018572485
+          y: 0.9982576
+          z: -0.03533304
+          w: -0.043457475
     - Position:
         x: 13.157122
         y: -7.7200003
@@ -1918,6 +1924,7 @@ MonoBehaviour:
   sceneCamera: {fileID: 1247633379}
   startZone: {fileID: 87278318}
   targetZone: {fileID: 898148886}
+  killedAnimationDuration: 3
 --- !u!4 &1357061042
 Transform:
   m_ObjectHideFlags: 0
@@ -2707,7 +2714,7 @@ PrefabInstance:
       objectReference: {fileID: 87278309}
     - target: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
       propertyPath: isDevMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
       propertyPath: sceneCamera

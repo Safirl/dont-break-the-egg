@@ -5,19 +5,20 @@ using System.Collections.Generic;
 using Levels;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace Scenes
 {
     public class LevelManager: MonoBehaviour
     {
 
-        public SceneAsset CurrentLevel { get; private set; }
-        [SerializeField] private List<SceneAsset> Levels;
-        [SerializeField] private SceneAsset winScene;
-        [SerializeField] private SceneAsset loseScene;
+        public string CurrentLevelName { get; private set; }
+        [SerializeField] private List<string> levelNames;
+        [SerializeField] private string winSceneName;
+        [SerializeField] private string loseSceneName;
 
         public Scenes CurrentScene { get; private set; } = Scenes.NONE;
-        private string nextSceneName;
+        private string _nextSceneName;
         [SerializeField] private Animator transition;
         [SerializeField] private TransitionAnimation transitionAnimation;
 
@@ -49,7 +50,7 @@ namespace Scenes
             if (!Level.Instance) return;
             BindToLevelDelegates();
             var currentScene = SceneManager.GetActiveScene();
-            CurrentLevel = Levels.Find(x => x.name == currentScene.name);
+            CurrentLevelName = levelNames.Find(x => x == currentScene.name);
         }
 
         public void BindToLevelDelegates()
@@ -78,14 +79,14 @@ namespace Scenes
                 case Scenes.NEXT_LEVEL:
                 {
                     //First level
-                    if (!CurrentLevel)
+                    if (CurrentLevelName == "")
                     {
-                        CurrentLevel = Levels[0];
-                        TransitionScene(CurrentLevel.name);
+                        CurrentLevelName = levelNames[0];
+                        TransitionScene(CurrentLevelName);
                     }
                     //Last level
-                    var currentLevelIndex = Levels.FindIndex(x => x == CurrentLevel);
-                    if (currentLevelIndex == Levels.Count - 1)
+                    var currentLevelIndex = levelNames.FindIndex(x => x == CurrentLevelName);
+                    if (currentLevelIndex == levelNames.Count - 1)
                     {
                         print("end of the game");
                         //@TODO
@@ -93,21 +94,21 @@ namespace Scenes
                     }
                     else
                     {
-                        CurrentLevel = Levels[currentLevelIndex + 1];
+                        CurrentLevelName = levelNames[currentLevelIndex + 1];
                         // CurrentLevel = Levels[currentLevelIndex + 1];
-                        TransitionScene(Levels[currentLevelIndex + 1].name);
+                        TransitionScene(levelNames[currentLevelIndex + 1]);
                     }
 
                     break;
                 }
                 case Scenes.SAME_LEVEL:
-                    TransitionScene(CurrentLevel.name);
+                    TransitionScene(CurrentLevelName);
                     break;
                 case Scenes.LOSE:
-                    TransitionScene(loseScene.name);
+                    TransitionScene(loseSceneName);
                     break;
                 case Scenes.WIN:
-                    TransitionScene(winScene.name);
+                    TransitionScene(winSceneName);
                     break;
             }
 
@@ -121,7 +122,7 @@ namespace Scenes
                 Debug.LogError("transition animation not set");
                 return;
             };
-            nextSceneName = sceneName;
+            _nextSceneName = sceneName;
             transitionAnimation.FadeOutTransitionOver += LoadNextScene;
             transition.ResetTrigger("fadeIn");
             transition.SetTrigger("fadeOut");
@@ -130,7 +131,7 @@ namespace Scenes
         public void LoadNextScene()
         {
             transitionAnimation.FadeOutTransitionOver -= LoadNextScene;
-            SceneManager.LoadScene(nextSceneName);
+            SceneManager.LoadScene(_nextSceneName);
         }
     }
 }

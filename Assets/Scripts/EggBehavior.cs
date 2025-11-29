@@ -16,6 +16,16 @@ public class EggBehavior : MonoBehaviour
     [SerializeField] private float jumpDistance = 1f;
     [SerializeField] private float moveDistance = 3f;
     private Vector3 strengthInput;
+    private bool jumpPressed;
+    private bool jumped = true;
+    private bool leftPressed;
+    private bool movedLeft = true;
+    private bool rightPressed;
+    private bool movedRight = true;
+    private bool upPressed;
+    private bool movedUp = true;
+    private bool downPressed;
+    private bool movedDown = true;
     
     private float jumpDelay = .5f;
     private float jumpCooldown;
@@ -28,9 +38,39 @@ public class EggBehavior : MonoBehaviour
     private void Update()
     { 
         jumpCooldown += Time.deltaTime;
+        //If we didn't do the movement, we don't want to change the keyPressed state
+        if (jumped)
+        {
+            jumpPressed = Keyboard.current.spaceKey.wasPressedThisFrame;
+            if (jumpPressed) jumped = false;
+        }
+
+        if (movedLeft)
+        {
+            leftPressed = Keyboard.current.leftArrowKey.wasPressedThisFrame;
+            if (leftPressed) movedLeft = false;
+        }
+
+        if (movedRight)
+        {
+            rightPressed = Keyboard.current.rightArrowKey.wasPressedThisFrame;
+            if (rightPressed) movedRight = false;
+        }
+
+        if (movedUp)
+        {
+            upPressed = Keyboard.current.upArrowKey.wasPressedThisFrame;
+            if (upPressed) movedUp = false;
+        }
+
+        if (movedDown)
+        {
+            downPressed = Keyboard.current.downArrowKey.wasPressedThisFrame;
+            if (downPressed) movedDown = false;
+        }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Level.Instance && !Level.Instance.IsLevelInitialized) return;
         
@@ -43,7 +83,7 @@ public class EggBehavior : MonoBehaviour
         }
 
         //jump
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && jumpCooldown > jumpDelay)
+        if (jumpPressed && jumpCooldown > jumpDelay)
         {
             Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit jumpHit, jumpDistance,collisionMask);
             if (jumpHit.collider)
@@ -51,26 +91,31 @@ public class EggBehavior : MonoBehaviour
                 strengthInput.y += jumpStrength;
                 jumpCooldown = 0f;
             }
+            jumped = true;
         }
 
         //sides
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame && rigidBody.linearVelocity.x > -maxVelocity)
+        if (rightPressed && rigidBody.linearVelocity.x > -maxVelocity)
         {
             strengthInput.x -= strength;
+            movedRight = true;
         }
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame && rigidBody.linearVelocity.x < maxVelocity)
+        if (leftPressed && rigidBody.linearVelocity.x < maxVelocity)
         {
             strengthInput.x += strength;
+            movedLeft = true;
         }
 
         //forward/backward
-        if (rigidBody.linearVelocity.z > -maxVelocity && Keyboard.current.upArrowKey.wasPressedThisFrame)
+        if (upPressed && rigidBody.linearVelocity.z > -maxVelocity)
         {
             strengthInput.z -= strength;
+            movedUp = true;
         }
-        if (rigidBody.linearVelocity.z < maxVelocity && Keyboard.current.downArrowKey.wasPressedThisFrame)
+        if (downPressed && rigidBody.linearVelocity.z < maxVelocity)
         {
             strengthInput.z += strength;
+            movedDown = true;
         }
 
         PushEgg(strengthInput);
