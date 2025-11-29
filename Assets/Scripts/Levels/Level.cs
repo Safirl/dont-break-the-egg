@@ -12,8 +12,8 @@ namespace Levels
         public static Level Instance { get; private set; }
 
         [SerializeField] protected CameraBehavior sceneCamera;
-        [SerializeField] private StartZone startZone;
-        [FormerlySerializedAs("endZone")] [SerializeField] private TargetZone targetZone;
+        [SerializeField] protected StartZone startZone;
+        [FormerlySerializedAs("endZone")] [SerializeField] protected TargetZone targetZone;
 
         [SerializeField] private float killedAnimationDuration = 3f;
         public delegate void OnPlayerKilledDelegate();
@@ -27,7 +27,7 @@ namespace Levels
         
         public readonly float TotalTime = 20;
         public float TimeLeft { get; private set; } = 20f;
-        public bool IsLevelInitialized { get; private set; }
+        public bool IsLevelInitialized { get; protected set; }
         public bool IsPlayerRunning { get; private set; }
         
         protected virtual void Awake()

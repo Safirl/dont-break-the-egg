@@ -1,23 +1,41 @@
-using System;
-using Levels;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zones;
 
-public class LevelWin : Level
+namespace Levels
 {
-    public Button nextButton;
-
-    public new void Start()
+    public class LevelWin : Level
     {
-        nextButton.onClick.AddListener(OnButtonClicked);
-    }
+        public Button nextButton;
 
-    void OnButtonClicked()
-    {
-        nextButton.onClick.RemoveListener(OnButtonClicked);
-        OnLevelEnded?.Invoke(Scenes.Scenes.NEXT_LEVEL);
+        public new void Start()
+        {
+            if (!targetZone)
+            {
+                targetZone = FindAnyObjectByType<TargetZone>();
+                if (!targetZone)
+                {
+                    Debug.LogError($"Target zone not found on {gameObject.name}");
+                    return;
+                }
+            }
+            targetZone.OnZoneEntered += OnPlayerReachedEnd;
+            // nextButton.onClick.AddListener(OnButtonClicked);
+            IsLevelInitialized = true;
+        }
+
+        void OnButtonClicked()
+        {
+            nextButton.onClick.RemoveListener(OnButtonClicked);
+            OnLevelEnded?.Invoke(Scenes.Scenes.NEXT_LEVEL);
+        }
+
+        public override void OnPlayerReachedEnd()
+        {
+            targetZone.OnZoneEntered -= OnPlayerReachedEnd;
+            // IsPlayerRunning = false;
+            // // IsLevelInitialized = false;
+            OnLevelEnded?.Invoke(Scenes.Scenes.NEXT_LEVEL);
+        }
     }
-    
 }
