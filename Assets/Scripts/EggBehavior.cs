@@ -15,22 +15,27 @@ public class EggBehavior : MonoBehaviour
     [FormerlySerializedAs("collisionMask")] [SerializeField] private LayerMask collisionMask;
     [SerializeField] private float jumpDistance = 1f;
     [SerializeField] private float moveDistance = 3f;
+    private Vector3 strengthInput;
     
-    private float jumpDelay = .2f;
+    private float jumpDelay = .5f;
     private float jumpCooldown;
+
+    private void Start()
+    {
+        jumpCooldown = jumpDelay;
+    }
 
     private void Update()
     { 
         jumpCooldown += Time.deltaTime;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (Level.Instance && !Level.Instance.IsLevelInitialized) return;
         
-        var force = Vector3.zero;
-        //If the player is to high, we don't want to allow movements
+        strengthInput = Vector3.zero;
+        //If the player is too high, we don't want to allow movements
         Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit hit, moveDistance,collisionMask);
         if (!hit.collider)
         {
@@ -41,34 +46,34 @@ public class EggBehavior : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && jumpCooldown > jumpDelay)
         {
             Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit jumpHit, jumpDistance,collisionMask);
-            if (!jumpHit.collider)
+            if (jumpHit.collider)
             {
-                force.y += jumpStrength;
+                strengthInput.y += jumpStrength;
                 jumpCooldown = 0f;
             }
         }
 
         //sides
-        if (rigidBody.linearVelocity.x > -maxVelocity && Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        if (Keyboard.current.rightArrowKey.wasPressedThisFrame && rigidBody.linearVelocity.x > -maxVelocity)
         {
-            force.x -= strength;
+            strengthInput.x -= strength;
         }
-        if (rigidBody.linearVelocity.x < maxVelocity && Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        if (Keyboard.current.leftArrowKey.wasPressedThisFrame && rigidBody.linearVelocity.x < maxVelocity)
         {
-            force.x += strength;
+            strengthInput.x += strength;
         }
 
         //forward/backward
         if (rigidBody.linearVelocity.z > -maxVelocity && Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
-            force.z -= strength;
+            strengthInput.z -= strength;
         }
         if (rigidBody.linearVelocity.z < maxVelocity && Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
-            force.z += strength;
+            strengthInput.z += strength;
         }
 
-        PushEgg(force);
+        PushEgg(strengthInput);
     }
 
     void PushEgg(Vector3 direction)

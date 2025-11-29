@@ -372,9 +372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 624721421267425503}
-  maxRadiusDistance: 0.6
-  stepDuration: 0.15
-  stepOvershootFraction: 0.8
+  maxRadiusDistance: 0.5
+  stepDuration: 0.08
+  stepOvershootFraction: 0.6
 --- !u!1 &906326434141939055
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,9 +420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 1181533066237373855}
-  maxRadiusDistance: 0.6
-  stepDuration: 0.15
-  stepOvershootFraction: 0.8
+  maxRadiusDistance: 0.5
+  stepDuration: 0.08
+  stepOvershootFraction: 0.6
 --- !u!1 &1089013891428144830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandBehavior
   spline: {fileID: 0}
-  timeOffset: 1
+  timeOffset: 0
   thumbStepper: {fileID: 6092731834011190173}
   indexStepper: {fileID: 2210072062612680598}
   middleStepper: {fileID: 6817110720154170618}
@@ -1148,9 +1148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 1697914671127915317}
-  maxRadiusDistance: 0.6
-  stepDuration: 0.15
-  stepOvershootFraction: 0.8
+  maxRadiusDistance: 0.5
+  stepDuration: 0.08
+  stepOvershootFraction: 0.6
 --- !u!1 &2965759926837680519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,9 +1520,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 8959052282484801292}
-  maxRadiusDistance: 0.6
-  stepDuration: 0.15
-  stepOvershootFraction: 0.8
+  maxRadiusDistance: 0.5
+  stepDuration: 0.08
+  stepOvershootFraction: 0.6
 --- !u!1 &4156783699460367215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,7 +1721,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -2588,9 +2588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegStepper
   homeTransform: {fileID: 3371534129196270603}
-  maxRadiusDistance: 0.6
-  stepDuration: 0.15
-  stepOvershootFraction: 0.8
+  maxRadiusDistance: 0.5
+  stepDuration: 0.08
+  stepOvershootFraction: 0.6
 --- !u!1 &8051714449352646016
 GameObject:
   m_ObjectHideFlags: 0
