@@ -271,7 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bb43a7933345969894c36ece76acd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scenes.SceneManager
-  levelNames: []
+  levelNames:
+  - LD-1
   winSceneName: WinningScene
   loseSceneName: LosingScene
   transition: {fileID: 529204129159397971}

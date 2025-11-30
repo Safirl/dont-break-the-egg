@@ -12,7 +12,7 @@ namespace Scenes
     public class LevelManager: MonoBehaviour
     {
 
-        public string CurrentLevelName { get; private set; }
+        public string CurrentLevelName { get; private set; } = "";
         [SerializeField] private List<string> levelNames;
         [SerializeField] private string winSceneName;
         [SerializeField] private string loseSceneName;
@@ -50,7 +50,7 @@ namespace Scenes
             if (!Level.Instance) return;
             BindToLevelDelegates();
             var currentScene = SceneManager.GetActiveScene();
-            CurrentLevelName = levelNames.Find(x => x == currentScene.name);
+            CurrentLevelName = levelNames.Find(x => x == currentScene.name) ?? "";
         }
 
         public void BindToLevelDelegates()
@@ -102,7 +102,16 @@ namespace Scenes
                     break;
                 }
                 case Scenes.SAME_LEVEL:
-                    TransitionScene(CurrentLevelName);
+                    //First level
+                    if (CurrentLevelName == "")
+                    {
+                        CurrentLevelName = levelNames[0];
+                        TransitionScene(CurrentLevelName);
+                    }
+                    else
+                    {
+                        TransitionScene(CurrentLevelName);
+                    }
                     break;
                 case Scenes.LOSE:
                     TransitionScene(loseSceneName);

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
             var debugObjects = GameObject.FindGameObjectsWithTag("Debug");
             foreach (var debugObject in debugObjects)
             {
-                debugObject.SetActive(isDevMode);
+                debugObject.GetComponent<MeshRenderer>().enabled = isDevMode;
             }
         };
     }
