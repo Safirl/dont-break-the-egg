@@ -5,6 +5,7 @@ using Scenes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Zones;
 using Random = UnityEngine.Random;
 
 public class EggBehavior : MonoBehaviour
@@ -150,8 +151,20 @@ public class EggBehavior : MonoBehaviour
         // {
         //     print("Z destroyed" + rigidBody.linearVelocity.z);
         // }
+        // if (other.gameObject.layer == LayerMask.NameToLayer("Target"))
+        // {
+        //     BreakEgg();
+        // }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Target")) return;
+        
+        if (other.GetComponent<TargetZone>() && other.GetComponent<TargetZone>().breakEgg)
+            BreakEgg();
+    }
+
     private void BreakEgg()
     {
         var eggRenderer = GetComponent<MeshRenderer>();

@@ -704,6 +704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: zone
       objectReference: {fileID: 0}
+    - target: {fileID: 656310664460385963, guid: a3a5bd7e1d0ef608faafad5e14578676, type: 3}
+      propertyPath: m_TagString
+      value: Debug
+      objectReference: {fileID: 0}
     - target: {fileID: 8158502360267347056, guid: a3a5bd7e1d0ef608faafad5e14578676, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.6515775
@@ -777,6 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ba9f4fcabe44e19fe9bca2981e7d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zones.TargetZone
+  breakEgg: 0
 --- !u!1 &1408133308
 GameObject:
   m_ObjectHideFlags: 0
