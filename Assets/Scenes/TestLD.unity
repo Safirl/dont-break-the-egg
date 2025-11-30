@@ -570,7 +570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc08f8b0c4041eb87fe9be1f5613b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zones.StartZone
-  GameManager: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
 --- !u!1001 &1368970020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -861,7 +860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ba9f4fcabe44e19fe9bca2981e7d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zones.TargetZone
-  GameManager: {fileID: 2786489332104645048, guid: 5ff419cb4cc703bf2bb48f33f8b1f1d6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

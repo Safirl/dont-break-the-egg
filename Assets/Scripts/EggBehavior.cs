@@ -1,12 +1,17 @@
 using System;
+using System.Collections.Generic;
 using Levels;
+using Scenes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class EggBehavior : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private List<GameObject> brokenEggParts;
+    
     [SerializeField] private float strength = 5;
     [SerializeField] private float jumpStrength = 10;
     [SerializeField] private float maxVelocity = 10;
@@ -33,6 +38,7 @@ public class EggBehavior : MonoBehaviour
     private void Start()
     {
         jumpCooldown = jumpDelay;
+        Level.Instance.OnPlayerKilled += BreakEgg;
     }
 
     private void Update()
@@ -144,6 +150,28 @@ public class EggBehavior : MonoBehaviour
         // {
         //     print("Z destroyed" + rigidBody.linearVelocity.z);
         // }
-        
+    }
+    
+    private void BreakEgg()
+    {
+        var eggRenderer = GetComponent<MeshRenderer>();
+        if (eggRenderer)
+        {
+            eggRenderer.enabled = false;
+        }
+        foreach (var brokenEggPart in brokenEggParts)
+        {
+            if (!brokenEggPart)
+            {
+                Debug.LogWarning("Invalid egg part found");
+                continue;
+            }
+            brokenEggPart.SetActive(true);
+            var eggRigidBody = brokenEggPart.GetComponent<Rigidbody>();
+            if (!eggRigidBody) return;
+
+            var force = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(0f, 3.0f), Random.Range(-3.0f, 3.0f));
+            eggRigidBody.AddForce(force, ForceMode.Impulse);
+        }
     }
 }
