@@ -33,7 +33,7 @@ public class EggBehavior : MonoBehaviour
     private bool downPressed;
     private bool movedDown = true;
     
-    private float jumpDelay = .5f;
+    private float jumpDelay = .2f;
     private float jumpCooldown;
 
     private void Start()
@@ -95,6 +95,7 @@ public class EggBehavior : MonoBehaviour
             Physics.Raycast(gameObject.transform.position, new Vector3(0,-1,0), out RaycastHit jumpHit, jumpDistance,collisionMask);
             if (jumpHit.collider)
             {
+                rigidBody.linearVelocity = new Vector3(rigidBody.linearVelocity.x, 0, rigidBody.linearVelocity.z);
                 strengthInput.y += jumpStrength;
                 jumpCooldown = 0f;
             }
