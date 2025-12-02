@@ -770,7 +770,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3033667219593020291, guid: 0679a4006a5a31ad9b72318f9141152f, type: 3}
+  - {fileID: 2100000, guid: 7f946e92c52532e3191dcda2c78ac070, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -861,9 +861,9 @@ MonoBehaviour:
   - {fileID: 4458366938525050902}
   - {fileID: 3220996791842243333}
   - {fileID: 1143716391382097308}
-  strength: 5
+  strength: 3
   jumpStrength: 8
-  maxVelocity: 10
+  maxVelocity: 6
   collisionDotProduct: 0.85
   destructionSpeed: 8
   collisionMask:
