@@ -1657,6 +1657,18 @@ PrefabInstance:
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 879926388}
+    - target: {fileID: 8913648175071293572, guid: acfddaa39e62a308db12d1f318b9cb11, type: 3}
+      propertyPath: startRotation.x
+      value: 47.43481
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913648175071293572, guid: acfddaa39e62a308db12d1f318b9cb11, type: 3}
+      propertyPath: startRotation.y
+      value: 145.659
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913648175071293572, guid: acfddaa39e62a308db12d1f318b9cb11, type: 3}
+      propertyPath: startRotation.z
+      value: 0.0000012621784
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

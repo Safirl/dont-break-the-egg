@@ -9,6 +9,8 @@ public class CameraBehavior : MonoBehaviour
 {
     // [SerializeField] private Transform playerPosition;
     [SerializeField] private Transform targetPosition;
+    [SerializeField] private Vector3 targetRotation;
+    // Vector3(47.4348106,145.658997,1.26217844e-06)
     [SerializeField] private float damping = .8f;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 startRotation;
@@ -33,6 +35,7 @@ public class CameraBehavior : MonoBehaviour
         if (!GameManager.Instance.isDevMode)
         {
             // transform.position = targetPosition.position + offset;
+            transform.DOMove(targetRotation, 10f).SetEase(Ease.InOutExpo);
             transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
                 .OnComplete(() => {
                     OnIntroAnimationCompleted.Invoke();
