@@ -19,7 +19,7 @@ public class HandBehavior : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     
     [SerializeField] private SplineContainer spline;
-    [SerializeField] private float timeOffset = 1f;
+    [SerializeField] private float timeOffset = 10f;
     private float _t = 0f;
 
     private Dictionary<string, FingerState> _fingerStates = new Dictionary<string, FingerState>();
@@ -55,7 +55,7 @@ public class HandBehavior : MonoBehaviour
     {
         if (!spline) return;
         
-        var timeLeft = Level.Instance.TimeLeft +  timeOffset;
+        var timeLeft = Level.Instance.TimeLeft + timeOffset;
         var totalTime = Level.Instance.TotalTime +  timeOffset;
         _t = (totalTime - timeLeft) / totalTime;
 
