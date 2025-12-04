@@ -134,29 +134,15 @@ public class EggBehavior : MonoBehaviour
         rigidBody.AddForce(direction, ForceMode.Impulse);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        var contactNormal = other.contacts[0].normal;
-        if (Vector3.Dot(contactNormal, new Vector3(0, 1, 0)) > collisionDotProduct &&
-            rigidBody.linearVelocity.y > destructionSpeed)
-        {
-            print("Y destroyed" + rigidBody.linearVelocity.y);    
-        }
-        // else if (Math.Abs(Vector3.Dot(contactNormal, new Vector3(1, 0, 0))) > collisionDotProduct &&
-        //          Math.Abs(rigidBody.linearVelocity.x) > destructionSpeed)
-        // {
-        //     print("X destroyed" + rigidBody.linearVelocity.x);
-        // }
-        // else if (Math.Abs(Vector3.Dot(contactNormal, new Vector3(0, 0, 1))) > collisionDotProduct &&
-        //          Math.Abs(rigidBody.linearVelocity.z) > destructionSpeed)
-        // {
-        //     print("Z destroyed" + rigidBody.linearVelocity.z);
-        // }
-        // if (other.gameObject.layer == LayerMask.NameToLayer("Target"))
-        // {
-        //     BreakEgg();
-        // }
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    // var contactNormal = other.contacts[0].normal;
+    // if (Vector3.Dot(contactNormal, new Vector3(0, 1, 0)) > collisionDotProduct &&
+    //     rigidBody.linearVelocity.y > destructionSpeed)
+    // {
+    //     print("Y destroyed" + rigidBody.linearVelocity.y);    
+    // }
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -184,7 +170,7 @@ public class EggBehavior : MonoBehaviour
             var eggRigidBody = brokenEggPart.GetComponent<Rigidbody>();
             if (!eggRigidBody) return;
 
-            var force = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(0f, 3.0f), Random.Range(-3.0f, 3.0f));
+            var force = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0f, 2.0f), Random.Range(-2.0f, 2.0f));
             eggRigidBody.AddForce(force, ForceMode.Impulse);
         }
     }
