@@ -35,12 +35,13 @@ public class CameraBehavior : MonoBehaviour
         if (!GameManager.Instance.isDevMode)
         {
             // transform.position = targetPosition.position + offset;
-            transform.DOMove(targetRotation, 10f).SetEase(Ease.InOutExpo);
+            transform.DORotate(targetRotation, 10f).SetEase(Ease.InOutExpo);
             transform.DOMove(targetPosition.position + offset, 10f).SetEase(Ease.InOutExpo)
                 .OnComplete(() => {
                     OnIntroAnimationCompleted.Invoke();
                 });
         } else {
+            transform.rotation = Quaternion.Euler(targetRotation);
             transform.position = targetPosition.position + offset;
             OnIntroAnimationCompleted.Invoke();
         }
