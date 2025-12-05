@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.8
+      value: -30.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -101.1
+      value: -78.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -171,6 +171,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6565803308879131139, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5018771192348933184}
+    - targetCorrespondingSourceObject: {fileID: -6565803308879131139, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6266975061086484510}
     - targetCorrespondingSourceObject: {fileID: 6513372695096472574, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3326056713145739978}
@@ -201,6 +204,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.07096541, y: 0.060383152, z: 0.0029224178}
   m_Center: {x: -0.025482707, y: 0.027093438, z: -0.0000000037252899}
+--- !u!114 &6266975061086484510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205074086355603131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98be228251c844ee8354a13ca6f1ccf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Zones.DangerZone
 --- !u!1 &7943497787140337848 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6513372695096472574, guid: e7505a2d05132d94d93e9fb3571cf48a, type: 3}

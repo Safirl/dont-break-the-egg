@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2681673110892730762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5569147114399543575}
+  - component: {fileID: 2575334722421114557}
+  - component: {fileID: 740259188633387033}
+  m_Layer: 3
+  m_Name: dangerzone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5569147114399543575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681673110892730762}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -36.2, y: 97, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3783436142498523268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2575334722421114557
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681673110892730762}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 115.03789, y: 9.275344, z: 115.44267}
+  m_Center: {x: -7.083248, y: -4.5620284, z: 4.116692}
+--- !u!114 &740259188633387033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681673110892730762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98be228251c844ee8354a13ca6f1ccf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Zones.DangerZone
 --- !u!1001 &3678260420466102127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,11 +92,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.5
+      value: -11.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -30.4
+      value: -30.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -182,7 +248,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5569147114399543575}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -3027434247104699024, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
       insertIndex: -1
@@ -397,8 +466,13 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.071240015, y: 0.018561438, z: 0.06948236}
-  m_Center: {x: -0.02534546, y: -0.17835553, z: -0.03328006}
+  m_Size: {x: 0.071240015, y: 0.021462573, z: 0.06972665}
+  m_Center: {x: -0.02534546, y: -0.17690547, z: -0.03315796}
+--- !u!4 &3783436142498523268 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
+  m_PrefabInstance: {fileID: 3678260420466102127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6944306113331862027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6004687824559461732, guid: fde5b46670ecc8b4eaed2dfc3b57bc1b, type: 3}
