@@ -156,6 +156,12 @@ public class EggBehavior : MonoBehaviour
 
     private void BreakEgg()
     {
+        var rigidBodyComponent = GetComponent<Rigidbody>();
+        if (rigidBodyComponent)
+        {
+            rigidBodyComponent.freezeRotation = true;
+        }
+        
         var eggRenderer = GetComponent<MeshRenderer>();
         if (eggRenderer)
         {
@@ -178,6 +184,11 @@ public class EggBehavior : MonoBehaviour
         
         friedEgg.SetActive(true);
         friedEgg.transform.rotation = Quaternion.identity;
+        var eggRigidbody = friedEgg.GetComponent<Rigidbody>();
+        if (eggRigidbody)
+        {
+            eggRigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse); 
+        };
         friedEgg.transform.DOScale(new Vector3(3f, 3f, 3f), 8f).SetEase(Ease.Linear).SetLink(friedEgg);
     }
 }

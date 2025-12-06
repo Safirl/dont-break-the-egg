@@ -95,6 +95,11 @@ namespace Levels
             if (!IsPlayerRunning) return;
             
             TimeLeft -= Time.deltaTime;
+            
+            if (TotalTime - TimeLeft > TotalTime + 5f)
+            {
+                KillPlayer();
+            }
         }
 
         public void KillPlayer()
