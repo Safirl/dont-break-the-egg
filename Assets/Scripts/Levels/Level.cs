@@ -87,7 +87,7 @@ namespace Levels
             targetZone.OnZoneEntered -= OnPlayerReachedEnd;
             IsPlayerRunning = false;
             // IsLevelInitialized = false;
-            OnLevelEnded?.Invoke(Scenes.Scenes.WIN);
+            StartCoroutine(KillPlayerCoroutine(Scenes.Scenes.WIN));
         }
 
         public void Update()
@@ -105,13 +105,13 @@ namespace Levels
             OnPlayerKilled?.Invoke();
             //@TODO Trigger the end animation (camera movement, player broken etc. whatever)
             // Instead of triggering the coroutine we could wait for a callback.
-            StartCoroutine(KillPlayerCoroutine());
+            StartCoroutine(KillPlayerCoroutine(Scenes.Scenes.LOSE));
         }
 
-        IEnumerator KillPlayerCoroutine()
+        IEnumerator KillPlayerCoroutine(Scenes.Scenes nextScene)
         {
             yield return new WaitForSeconds(killedAnimationDuration);
-            OnLevelEnded?.Invoke(Scenes.Scenes.LOSE);
+            OnLevelEnded?.Invoke(nextScene);
         }
     }
 }

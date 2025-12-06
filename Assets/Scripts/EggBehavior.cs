@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Levels;
 using Scenes;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class EggBehavior : MonoBehaviour
     [FormerlySerializedAs("collisionMask")] [SerializeField] private LayerMask collisionMask;
     [SerializeField] private float jumpDistance = 1f;
     [SerializeField] private float moveDistance = 3f;
+    [SerializeField] private GameObject friedEgg;
     private Vector3 strengthInput;
     private bool jumpPressed;
     private bool jumped = true;
@@ -173,5 +175,9 @@ public class EggBehavior : MonoBehaviour
             var force = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0f, 2.0f), Random.Range(-2.0f, 2.0f));
             eggRigidBody.AddForce(force, ForceMode.Impulse);
         }
+        
+        friedEgg.SetActive(true);
+        friedEgg.transform.rotation = Quaternion.identity;
+        friedEgg.transform.DOScale(new Vector3(3f, 3f, 3f), 8f).SetEase(Ease.Linear).SetLink(friedEgg);
     }
 }
