@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
 using Levels;
+using Scenes;
 using UnityEngine.Events;
 
 public class CameraBehavior : MonoBehaviour
@@ -32,7 +33,7 @@ public class CameraBehavior : MonoBehaviour
     public void OnLevelStarted()
     {
         Level.Instance.OnLevelStarted -= OnLevelStarted;
-        if (!GameManager.Instance.isDevMode)
+        if (!GameManager.Instance.isDevMode && LevelManager.Instance.CurrentScene != Scenes.Scenes.SAME_LEVEL)
         {
             // transform.position = targetPosition.position + offset;
             transform.DORotate(targetRotation, 10f).SetEase(Ease.InOutExpo);
