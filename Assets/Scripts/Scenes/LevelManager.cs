@@ -38,6 +38,11 @@ namespace Scenes
             if (!transition) transition = GetComponentInChildren<Animator>();
             SceneManager.sceneLoaded += (scene, mode) =>
             {
+                if (!transition)
+                {
+                    Debug.LogError("transition animation not set");
+                    return;
+                }
                 transition.ResetTrigger("fadeOut");
                 transition.SetTrigger("fadeIn");
                 BindToLevelDelegates();
