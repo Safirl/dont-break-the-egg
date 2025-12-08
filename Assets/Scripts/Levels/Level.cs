@@ -16,8 +16,10 @@ namespace Levels
         [FormerlySerializedAs("endZone")] [SerializeField] protected TargetZone targetZone;
 
         [SerializeField] private float killedAnimationDuration = 3f;
-        public delegate void OnPlayerKilledDelegate();
-        public OnPlayerKilledDelegate OnPlayerKilled;
+        public delegate void OnPlayerCompletedLevel();
+        public OnPlayerCompletedLevel OnPlayerKilled;
+        public OnPlayerCompletedLevel OnEndReached;
+        
         
         public delegate void OnLevelStartedDelegate();
         public OnLevelStartedDelegate OnLevelStarted;
@@ -86,7 +88,7 @@ namespace Levels
         {
             targetZone.OnZoneEntered -= OnPlayerReachedEnd;
             IsPlayerRunning = false;
-            // IsLevelInitialized = false;
+            OnEndReached?.Invoke();
             StartCoroutine(KillPlayerCoroutine(Scenes.Scenes.WIN));
         }
 
@@ -96,7 +98,7 @@ namespace Levels
             
             TimeLeft -= Time.deltaTime;
             
-            if (TotalTime - TimeLeft > TotalTime + 5f)
+            if (TotalTime - TimeLeft > TotalTime + 6f)
             {
                 KillPlayer();
             }

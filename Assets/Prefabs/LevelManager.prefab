@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scenes.SceneManager
   levelNames:
+  - LevelIntro
   - Level1
   - Level2
   - Level3

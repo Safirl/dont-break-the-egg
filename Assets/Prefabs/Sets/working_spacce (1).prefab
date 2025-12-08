@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.599998
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
       propertyPath: m_LocalRotation.w
@@ -92,22 +92,22 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
+    - targetCorrespondingSourceObject: {fileID: -2115999155526595602, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7079579944327683496}
+      addedObject: {fileID: 2628703963854546676}
   m_SourcePrefab: {fileID: 100100000, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
---- !u!1 &5422446668953816444 stripped
+--- !u!1 &2676117497198721987 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
+  m_CorrespondingSourceObject: {fileID: -2115999155526595602, guid: 7ceb334764ca9c44792c067de8fd9606, type: 3}
   m_PrefabInstance: {fileID: 5152416310603493421}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7079579944327683496
+--- !u!65 &2628703963854546676
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5422446668953816444}
+  m_GameObject: {fileID: 2676117497198721987}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -120,5 +120,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 136.8, y: 10, z: 113.5}
-  m_Center: {x: -43.2, y: 130, z: 0}
+  m_Size: {x: 0.07096541, y: 0.058556665, z: 0.0029224178}
+  m_Center: {x: -0.025482707, y: -0.02983162, z: 0.0000000037252899}
