@@ -14,6 +14,7 @@ namespace Levels
         [SerializeField] protected CameraBehavior sceneCamera;
         [SerializeField] protected StartZone startZone;
         [FormerlySerializedAs("endZone")] [SerializeField] protected TargetZone targetZone;
+        [SerializeField] private AudioSource music;
 
         [SerializeField] private float killedAnimationDuration = 3f;
         public delegate void OnPlayerCompletedLevel();
@@ -47,7 +48,6 @@ namespace Levels
         
         public void Start()
         {
-            // OnStart();
             if (!sceneCamera || !startZone || !targetZone)
             {
                 sceneCamera = FindAnyObjectByType<CameraBehavior>();
@@ -63,6 +63,10 @@ namespace Levels
             sceneCamera.OnIntroAnimationCompleted += OnIntroFinished;
             startZone.OnZoneExited += OnPlayerMoved;
             targetZone.OnZoneEntered += OnPlayerReachedEnd;
+            if (music)
+            {
+                music.Play();
+            }
             StartCoroutine(StartLevelCoroutine());
         }
         

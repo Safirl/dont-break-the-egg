@@ -23,6 +23,10 @@ public class EggBehavior : MonoBehaviour
     [SerializeField] private float jumpDistance = 1f;
     [SerializeField] private float moveDistance = 3f;
     [SerializeField] private GameObject friedEgg;
+
+    [SerializeField] private AudioSource breakEggAudio;
+    [SerializeField] private AudioSource friedEggAudio;
+
     private Vector3 strengthInput;
     private bool jumpPressed;
     private bool jumped = true;
@@ -42,6 +46,7 @@ public class EggBehavior : MonoBehaviour
     {
         jumpCooldown = jumpDelay;
         Level.Instance.OnPlayerKilled += BreakEgg;
+        Level.Instance.OnEndReached += OnEndReached;
     }
 
     private void Update()
@@ -154,8 +159,20 @@ public class EggBehavior : MonoBehaviour
             BreakEgg();
     }
 
+    private void OnEndReached()
+    {
+        if (friedEggAudio)
+        {
+            friedEggAudio.Play();
+        }
+    }
+
     private void BreakEgg()
     {
+        if (breakEggAudio)
+        {
+            breakEggAudio.Play();
+        }
         var rigidBodyComponent = GetComponent<Rigidbody>();
         if (rigidBodyComponent)
         {
@@ -190,5 +207,18 @@ public class EggBehavior : MonoBehaviour
             eggRigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse); 
         };
         friedEgg.transform.DOScale(new Vector3(3f, 3f, 3f), 8f).SetEase(Ease.Linear).SetLink(friedEgg);
+    }
+
+    private void OnDestroy()
+    {
+        if (friedEggAudio)
+        {
+            friedEggAudio.Stop();
+        }
+
+        if (breakEggAudio)
+        {
+            breakEggAudio.Stop();
+        }
     }
 }
