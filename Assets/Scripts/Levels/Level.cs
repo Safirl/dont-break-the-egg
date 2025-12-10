@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using DG.Tweening;
 using Scenes;
 using UnityEngine.Serialization;
 using Zones;
@@ -65,7 +66,9 @@ namespace Levels
             targetZone.OnZoneEntered += OnPlayerReachedEnd;
             if (music)
             {
+                music.volume = 0f;
                 music.Play();
+                music.DOFade(.8f, 1f);
             }
             StartCoroutine(StartLevelCoroutine());
         }
@@ -121,6 +124,13 @@ namespace Levels
 
         IEnumerator KillPlayerCoroutine(Scenes.Scenes nextScene)
         {
+            if (music)
+            {
+                music.DOFade(0f, killedAnimationDuration).OnComplete(() =>
+                {
+                    music.Stop();
+                });
+            }
             yield return new WaitForSeconds(killedAnimationDuration);
             OnLevelEnded?.Invoke(nextScene);
         }

@@ -4802,7 +4802,7 @@ MonoBehaviour:
   sceneCamera: {fileID: 1247633379}
   startZone: {fileID: 87278318}
   targetZone: {fileID: 898148886}
-  music: {fileID: 0}
+  music: {fileID: 1357061043}
   killedAnimationDuration: 3
 --- !u!4 &1357061042
 Transform:
