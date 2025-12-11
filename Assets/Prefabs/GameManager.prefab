@@ -44,24 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4ff33099e05e7428f7b53dacaf400e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  pan: {fileID: 0}
-  player: {fileID: 7271559557005162673, guid: 4d3003da9383ee658a7d7fb7ce93fa21, type: 3}
-  onLevelStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8913648175071293572, guid: acfddaa39e62a308db12d1f318b9cb11, type: 3}
-        m_TargetAssemblyTypeName: CameraBehavior, Assembly-CSharp
-        m_MethodName: OnLevelStarted
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onLevelEnded:
-    m_PersistentCalls:
-      m_Calls: []
-  sceneCamera: {fileID: 0}
+  isDevMode: 0
