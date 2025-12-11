@@ -716,6 +716,7 @@ GameObject:
   - component: {fileID: 2132875503221153408}
   - component: {fileID: 7131932654442933129}
   - component: {fileID: 8892731367340223678}
+  - component: {fileID: 108621073012296290}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Player
@@ -1071,6 +1072,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &108621073012296290
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271559557005162673}
+  m_Enabled: 1
 --- !u!1 &8527622920888006910
 GameObject:
   m_ObjectHideFlags: 0

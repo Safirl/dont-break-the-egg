@@ -64,11 +64,11 @@ namespace Levels
             sceneCamera.OnIntroAnimationCompleted += OnIntroFinished;
             startZone.OnZoneExited += OnPlayerMoved;
             targetZone.OnZoneEntered += OnPlayerReachedEnd;
-            if (music)
+            if (music && !GameManager.Instance.isDevMode)
             {
                 music.volume = 0f;
                 music.Play();
-                music.DOFade(.8f, 1f);
+                music.DOFade(.5f, 1f);
             }
             StartCoroutine(StartLevelCoroutine());
         }

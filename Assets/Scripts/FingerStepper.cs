@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class FingerStepper : MonoBehaviour
@@ -9,6 +10,7 @@ public class FingerStepper : MonoBehaviour
     
     [SerializeField] private float stepDuration;
     [SerializeField] float stepOvershootFraction;
+    [SerializeField] private AudioSource audioSource;
     
     public bool IsMoving { get; private set; }
 
@@ -33,6 +35,11 @@ public class FingerStepper : MonoBehaviour
 
         float elapsedTime = 0f;
 
+        if (audioSource)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+        }
+
         do
         {
             elapsedTime += Time.deltaTime;
@@ -47,13 +54,16 @@ public class FingerStepper : MonoBehaviour
                     normalizedTime
                 );
             
-            // transform.position = Vector3.Lerp(startPoint, centerPoint, normalizedTime);
             transform.rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
             
             yield return null;
         }
         while (elapsedTime < stepDuration);
         IsMoving = false;
+        // if (audioSource)
+        // {
+        //     audioSource.Stop();
+        // }
     }
 
     public void TryMove()
