@@ -15,6 +15,7 @@ namespace Scenes
         public string CurrentLevelName { get; private set; } = "";
         [SerializeField] private List<string> levelNames;
         [SerializeField] private string winSceneName;
+        [SerializeField] private string endSceneName;
         [SerializeField] private string loseSceneName;
 
         public Scenes CurrentScene { get; private set; } = Scenes.NONE;
@@ -79,6 +80,7 @@ namespace Scenes
                 return;
             }
 
+            var currentLevelIndex = levelNames.FindIndex(x => x == CurrentLevelName);
             switch (requestedScene)
             {
                 case Scenes.NEXT_LEVEL:
@@ -89,18 +91,9 @@ namespace Scenes
                         CurrentLevelName = levelNames[0];
                         TransitionScene(CurrentLevelName);
                     }
-                    //Last level
-                    var currentLevelIndex = levelNames.FindIndex(x => x == CurrentLevelName);
-                    if (currentLevelIndex == levelNames.Count - 1)
-                    {
-                        print("end of the game");
-                        //@TODO
-                        //Trigger win event
-                    }
                     else
                     {
                         CurrentLevelName = levelNames[currentLevelIndex + 1];
-                        // CurrentLevel = Levels[currentLevelIndex + 1];
                         TransitionScene(levelNames[currentLevelIndex + 1]);
                     }
 
@@ -122,6 +115,12 @@ namespace Scenes
                     TransitionScene(loseSceneName);
                     break;
                 case Scenes.WIN:
+                    //Last level
+                    if (currentLevelIndex == levelNames.Count - 1)
+                    {
+                        CurrentLevelName = CurrentLevelName = levelNames[1];
+                        TransitionScene(endSceneName);
+                    }
                     TransitionScene(winSceneName);
                     break;
             }

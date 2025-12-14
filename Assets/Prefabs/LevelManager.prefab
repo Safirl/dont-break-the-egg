@@ -277,6 +277,7 @@ MonoBehaviour:
   - Level2
   - Level3
   winSceneName: WinningScene
+  endSceneName: EndScene
   loseSceneName: LosingScene
   transition: {fileID: 529204129159397971}
   transitionAnimation: {fileID: 231991805916765635}
