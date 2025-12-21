@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LD-3.unity
     guid: 1888d6d7bdfd0d0d386b74040409a1d8
+  - enabled: 1
+    path: Assets/Scenes/Final/WinningScene.unity
+    guid: f4e4787da05d31ce38b6d14f41bfc7a1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

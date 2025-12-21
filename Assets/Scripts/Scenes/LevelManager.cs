@@ -118,8 +118,9 @@ namespace Scenes
                     //Last level
                     if (currentLevelIndex == levelNames.Count - 1)
                     {
-                        CurrentLevelName = CurrentLevelName = levelNames[1];
+                        CurrentLevelName = levelNames[1];
                         TransitionScene(endSceneName);
+                        break;
                     }
                     TransitionScene(winSceneName);
                     break;
